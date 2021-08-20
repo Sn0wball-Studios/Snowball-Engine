@@ -1,0 +1,33 @@
+{
+  "version": 2,
+  "dgSpecHash": "fU/GPGQOGNaNgBtruUD5Jc0npRcsSPa9Gqr+5zctfjQxG4f72A7/p6PoXS/7LJAF5OS4+wCtbbP9efGFqVetfA==",
+  "success": true,
+  "projectFilePath": "/home/bbq/Projects/Snowball/Snowball.csproj",
+  "expectedPackageFiles": [
+    "/home/bbq/.nuget/packages/csfml/2.5.0/csfml.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/imgui.net/1.78.0/imgui.net.1.78.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/moonsharp/2.0.0/moonsharp.2.0.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/moonsharp.debugger.vscode/2.0.0/moonsharp.debugger.vscode.2.0.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk/4.6.4/opentk.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.compute/4.6.4/opentk.compute.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.core/4.6.4/opentk.core.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.graphics/4.6.4/opentk.graphics.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.input/4.6.4/opentk.input.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.mathematics/4.6.4/opentk.mathematics.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.openal/4.6.4/opentk.openal.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.redist.glfw/3.3.0-pre20200830200122/opentk.redist.glfw.3.3.0-pre20200830200122.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.windowing.common/4.6.4/opentk.windowing.common.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.windowing.desktop/4.6.4/opentk.windowing.desktop.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/opentk.windowing.graphicslibraryframework/4.6.4/opentk.windowing.graphicslibraryframework.4.6.4.nupkg.sha512",
+    "/home/bbq/.nuget/packages/sfml.audio/2.5.0/sfml.audio.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/sfml.graphics/2.5.0/sfml.graphics.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/sfml.net/2.5.0/sfml.net.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/sfml.system/2.5.0/sfml.system.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/sfml.window/2.5.0/sfml.window.2.5.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/system.buffers/4.4.0/system.buffers.4.4.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/system.numerics.vectors/4.4.0/system.numerics.vectors.4.4.0.nupkg.sha512",
+    "/home/bbq/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
