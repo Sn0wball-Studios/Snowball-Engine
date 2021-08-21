@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using System;
 namespace Snowball
 {
     public abstract class WindowImplementation
@@ -19,6 +20,7 @@ namespace Snowball
         public abstract void ProcessFonts();
         public abstract float DeltaTime();
         public abstract Vector2 GetSpriteSize(Sprite sprite);
+        public abstract BoundingBox GetBounds(Sprite sprite);
         public abstract void CacheSprite(Sprite sprite);
         public abstract bool SpriteIsChached(Sprite sprite);
 
@@ -29,6 +31,16 @@ namespace Snowball
         public void SetCamera(Vector2 position)
         {
             camera = position;
+        }
+
+        public abstract void DebugDrawBox(BoundingBox box);
+
+
+        public bool IsOnScreen(Sprite sprite)
+        {
+            BoundingBox screen = new BoundingBox(size);
+            screen.min = camera - size / 2;
+            return BoundingBox.AABB(screen, sprite.bounds);
         }
 
         public void LoadFonts()

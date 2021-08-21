@@ -15,7 +15,7 @@ namespace Snowball
         {
             get
             {
-                return min + (max/2); 
+                return min + (size); 
             }
         }
 
@@ -41,6 +41,15 @@ namespace Snowball
             {
                 return new Vector2(size.X / 2, 0);
             }
+        }
+
+        public static bool AABB(BoundingBox A, BoundingBox B)
+        {
+            return A.min.X <= B.max.X &&
+                A.max.X >= B.min.X &&
+                A.min.Y <= B.max.Y &&
+                A.max.Y >= B.min.Y;
+
         }
 
         public BoundingBox(Vector2 size)

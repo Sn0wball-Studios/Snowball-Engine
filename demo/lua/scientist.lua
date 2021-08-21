@@ -23,9 +23,6 @@ end
 function scientist.update(self)
     self.timer = self.timer + dt() * self.speed
 
-    self.position.Y = self.position.Y + math.sin(self.timer) * dt() * 16
-    self.position.X = self.position.X + math.cos(self.timer) * dt() * 16
-
     self.rotation = self.rotation + dt() * self.speed * 180
 end
 

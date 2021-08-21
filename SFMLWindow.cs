@@ -148,6 +148,26 @@ namespace Snowball
             var sfSprite = sfSprites[sprite.textureFile];
             return SFMLUtils.Vec2uToVec2(sfSprite.Texture.Size);
         }
+
+        public override BoundingBox GetBounds(Sprite sprite)
+        {
+            BoundingBox output = new BoundingBox(new Vector2(sprite.size.X, sprite.size.Y) * 1.5f);
+            output.min =  sprite.position - (sprite.size / 1.5f);
+            return output;
+        }
+        RectangleShape rectangleShape = new RectangleShape()
+        {
+            FillColor = new Color(255, 0, 0, 100),
+            OutlineColor = Color.Red,
+            OutlineThickness = 1
+        };
+
+        public override void DebugDrawBox(BoundingBox box)
+        {
+            rectangleShape.Size = SFMLUtils.Vec2ToVec2f(box.size);
+            rectangleShape.Position = SFMLUtils.Vec2ToVec2f(box.min - (camera - size/2));
+            window.Draw(rectangleShape);
+        }
         
 
         public override bool IsOpen()
@@ -195,11 +215,7 @@ namespace Snowball
         
         readonly static Dictionary<string, SFML.Graphics.Sprite> sfSprites = new Dictionary<string, SFML.Graphics.Sprite>();
 
-        //TODO:
-        public bool IsOnScreen(Sprite sprite)
-        {
-            return true;
-        }
+
 
 
         public override void DrawSprite(Snowball.Sprite sprite)
@@ -208,6 +224,8 @@ namespace Snowball
             {
                 return;
             }
+
+            DebugDrawBox(sprite.bounds);
             var sfSprite = sfSprites[sprite.textureFile];
             sfSprite.Position = SFMLUtils.Vec2ToVec2f(sprite.position - (camera - size/2));
             sfSprite.Rotation = sprite.rotation;

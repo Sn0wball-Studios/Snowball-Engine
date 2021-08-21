@@ -15,6 +15,15 @@ namespace Snowball
 
         public Vector2 size = new Vector2();
 
+        [JsonIgnore]
+        public BoundingBox bounds
+        {
+            get
+            {
+                return Engine.window.GetBounds(this);
+            }
+        }
+
         //bri'ish sprite
         public void Init(string json)
         {
