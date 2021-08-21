@@ -7,18 +7,15 @@ namespace Snowball
 {
     public class LuaObject
     {
-        public string name = "Object";
-        public int id;
-
-        public static List<DynValue> objects = new List<DynValue>();
+        public static List<Table> objects = new List<Table>();
         public static Script script = new Script();
 
 
-        public static DynValue GetObject(int id)
+        public static Table GetObject(int id)
         {
             foreach(var value in objects)
             {
-                int _id = (int)value.Table["id"];
+                int _id = (int)value["id"];
                 if(id == _id)
                 {
                     Console.WriteLine("cum");
@@ -28,36 +25,34 @@ namespace Snowball
             return null;
         }
 
-        public static Table CreateLuaTable(string file, Vector2 position)
+
+
+        public static Table AddObject(Table table)
         {
-            var value = LuaObject.script.DoFile(Engine.scriptDirectory + file);
-            value.Table["position"] = position;
-            ((Closure)value.Table["start"]).Call();
-            objects.Add(value);
-            return value.Table;
+            objects.Add(table);
+            return table;
         }
 
-        public static void SetProperty(string name, object value, DynValue dyn)
+        public static void SetProperty(string name, object value, Table dyn)
         {
-            dyn.Table[name] = value;
+            dyn[name] = value;
         }
 
-        public static T GetProperty<T>(string name, DynValue dyn)
+        public static T GetProperty<T>(string name, Table dyn)
         {
-            return (T)dyn.Table[name];
+            return (T)dyn[name];
         }
 
-        
-
+       
         public static void Update()
         {
+            ((Closure)script.Globals["update"]).Call();
+            
             foreach(var obj in objects)
-            {
-                SetProperty("deltaTime", Engine.deltaTime, obj);
+            {              
+                ((Closure)obj["update"]).Call(obj);
                 
-                ((Closure)obj.Table["update"]).Call();
-                
-                var sprite = obj.Table["sprite"] as Sprite;
+                var sprite = obj["sprite"] as Sprite;
 
                 if(sprite != null)
                 {
@@ -78,9 +73,9 @@ namespace Snowball
                 }
             };
             LuaUtils.LoadGlobalFunctions(script, new LuaObject());
-            
-            LuaUtils.LoadFuncs(script);
             script.DoFile(Engine.scriptDirectory + "load.lua");
+
+            ((Closure)script.Globals["start"]).Call();
         }
         
 

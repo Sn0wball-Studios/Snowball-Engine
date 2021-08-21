@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fU/GPGQOGNaNgBtruUD5Jc0npRcsSPa9Gqr+5zctfjQxG4f72A7/p6PoXS/7LJAF5OS4+wCtbbP9efGFqVetfA==",
+  "dgSpecHash": "0CxyzZpUiBMywf/l3pzZregx5bSFQPWMgbRtCxw8snoSc6gcTOFxh/sB2SPJ5biMPzLO+/qZWECHShwIHz5+NQ==",
   "success": true,
-  "projectFilePath": "/home/bbq/Projects/Snowball/Snowball.csproj",
+  "projectFilePath": "/home/bbq/Projects/Snowball-Engine/Snowball.csproj",
   "expectedPackageFiles": [
     "/home/bbq/.nuget/packages/csfml/2.5.0/csfml.2.5.0.nupkg.sha512",
     "/home/bbq/.nuget/packages/imgui.net/1.78.0/imgui.net.1.78.0.nupkg.sha512",

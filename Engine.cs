@@ -139,13 +139,6 @@ namespace Snowball
             LuaUtils.CreateLuaFile("load.lua");
         }
 
-        static void UpdateScriptedObjects()
-        {
-            foreach(var obj in ScriptedObject.scriptedObjects)
-            {
-                obj.Update();
-            }
-        }
 
         public static void Run(string[] args)
         {
@@ -179,7 +172,6 @@ namespace Snowball
                 Input.ProcessInputs();
                 window.Clear();
                 deltaTime = window.DeltaTime();
-                //UpdateScriptedObjects();
                 LuaObject.Update();
                 window.Present();
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/bbq/Projects/Snowball/Snowball.csproj": {}
+    "/home/bbq/Projects/Snowball-Engine/Snowball.csproj": {}
   },
   "projects": {
-    "/home/bbq/Projects/Snowball/Snowball.csproj": {
+    "/home/bbq/Projects/Snowball-Engine/Snowball.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/bbq/Projects/Snowball/Snowball.csproj",
+        "projectUniqueName": "/home/bbq/Projects/Snowball-Engine/Snowball.csproj",
         "projectName": "Snowball",
-        "projectPath": "/home/bbq/Projects/Snowball/Snowball.csproj",
+        "projectPath": "/home/bbq/Projects/Snowball-Engine/Snowball.csproj",
         "packagesPath": "/home/bbq/.nuget/packages/",
-        "outputPath": "/home/bbq/Projects/Snowball/obj/",
+        "outputPath": "/home/bbq/Projects/Snowball-Engine/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/bbq/.nuget/NuGet/NuGet.Config"

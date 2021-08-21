@@ -1,7 +1,10 @@
 {
   "demoFont": {
     "ttf": "alagard.ttf",
-    "size": 16
+    "size": 16,
+    "r": 0,
+    "g": 255,
+    "b": 0
   },
   "npcSpeech": {
     "ttf": "Early GameBoy.ttf",

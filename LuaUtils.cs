@@ -20,15 +20,13 @@ namespace Snowball
             UserData.RegisterType<Sprite>();
         }
 
-        static string scriptedSequenceCode = File.ReadAllText("engineScripts/scripted_sequence.lua");
         
-
-        
-
-        public static void LoadFuncs(Script script)
+        static float LUA_GetDeltaTime()
         {
-            
+            return Engine.deltaTime;
         }
+        
+
 
         public static void CreateLuaFile(string name)
         {
@@ -53,8 +51,10 @@ namespace Snowball
 
         public static void LoadGlobalFunctions(Script script, LuaObject obj)
         {
+            script.Globals["CreateObject"] = (Func<Table, Table>)LuaObject.AddObject;
+            script.Globals["DrawSprite"] = (Action<Sprite>)Engine.window.DrawSprite;
+            script.Globals["dt"] = (Func<float>)LUA_GetDeltaTime;
             script.Globals["LoadSprite"] = (Func<string, Sprite>)LoadSprite;
-            script.Globals["Create"] = (Func<string, Vector2, Table>)LuaObject.CreateLuaTable; 
             script.Globals["CreateSoundSource"] = (Func<string, SoundSource>)Engine.soundFactory.CreateSource;
             script.Globals["CreateScriptableObject"] = (Func<string, Vector2, ScriptedObject>)ScriptedObject.Create;
             script.Globals["InputIsKeyDown"] = (Func<KeyboardKey, bool>)Input.IsKeyDown;
@@ -77,6 +77,15 @@ namespace Snowball
             script.Globals["MoveObject"] = (Action<ScriptedObject, Vector2, float>)ScriptedSequences.LUA_MoveToLocation;
             script.Globals["Say"] = (Action<ScriptedObject, string, float, string>)ScriptedSequences.LUA_Say;
             script.Globals["Delay"] = (Action<ScriptedObject, float>)ScriptedSequences.LUA_Delay;
+        
+            //enums
+            script.Globals["OriginType"] = UserData.CreateStatic<OriginType>();
+
+            //debug stuff
+            script.Globals["DebugGetMemoryUsage"] = (Func<long>)Debug.GetMemoryUsage;
+
+            //fast math
+            script.Globals["sin"] = (Func<float, float>)FastMath.Sin;
         }
 
         

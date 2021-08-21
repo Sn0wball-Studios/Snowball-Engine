@@ -1,27 +1,28 @@
---zombie.lua created on 8/15/2021 5:33:17 PM using Sn0wballEngine V6.0
+local player = {}
 
---called on object creation
-function start()
-	position = Vec2(160, 90)
-	AddSprite("guy.json")
-	id = "player"
+function player:create(position_)
+
+    o = {
+        position = position_, 
+        rotation = 0, 
+        id = 0, 
+        name = "player",
+        sprite = LoadSprite("guy.json"),
+        update = player.update,
+        speed = 32 * 1.4
+    }
+    
+	self.__index = self
+	setmetatable(o, self)
+    return o
+
 end
 
-turnSpeed = 90
-moveSpeed = 32
---called once per frame
-function update()
-	
-	rotation = rotation + InputGetAxis("horizontal") * turnSpeed * deltaTime
-	
 
-	
-	velocity = Vec2(math.cos(math.rad(rotation)), math.sin(math.rad(rotation)))
-
-	if InputIsKeyDown(KeyboardKey.W) then 
-		position = position + velocity * moveSpeed * deltaTime
-	end
-	
-
-	SetCameraPosition(position)
+function player.update(self)
+    self.position.X = self.position.X + InputGetAxis("horizontal") * self.speed * dt()
+	self.position.Y = self.position.Y + -InputGetAxis("vertical") * self.speed * dt()
+	SetCameraPosition(self.position)
 end
+
+return player

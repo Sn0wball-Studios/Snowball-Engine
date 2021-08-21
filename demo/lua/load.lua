@@ -1,14 +1,22 @@
 --load.lua created on 8/15/2021 5:30:34 PM using Sn0wballEngine V6.0
-function start()
-	-- CreateScriptableObject("scientist.lua", Vec2(100, 100)).id = "Jeff"
-	-- CreateScriptableObject("scientist.lua", Vec2(200, 100)).id = "Dr Shitballs"
-	-- CreateScriptableObject("player.lua", Vec2(50,50))
-	-- CreateScriptableObject("sequence_demolevel_scientist.lua", Vec2(0,0))
-	guard = Create("guard.lua", Vec2(50,50))
+scientist = require("scientist")
+player = require("player")
 
-	print(guard.name)
-	print(guard.position.x)
+function start()
+	for i = 0, 1000 do
+		posx = RandomRange(-300, 300)
+		posy = RandomRange(-300, 300)
+		CreateObject(scientist:create(Vec2(posx, posy)))
+	end
+
+	CreateObject(player:create(Vec2(100, 100)))
+	
 end
 
 
-start()
+function update()  
+	UIDrawText("FPS:".. math.floor(1/dt()), "demoFont", Vec2(0,0), OriginType.topLeft)
+	UIDrawText("entities: 1000", "demoFont", Vec2(0, 20), OriginType.topLeft)
+	UIDrawText("memory:".. math.floor(DebugGetMemoryUsage()/1000/1000).."MB", "demoFont", Vec2(0, 40), OriginType.topLeft)
+end
+
