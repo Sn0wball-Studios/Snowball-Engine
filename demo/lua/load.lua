@@ -23,8 +23,8 @@ end
 
 function update()  
 	UIDrawText("FPS:".. math.floor(1/dt()), "demoFont", Vec2(0,0), OriginType.topLeft)
-	UIDrawText("entities: ".. count, "demoFont", Vec2(0, 20), OriginType.topLeft)
-	UIDrawText("memory:".. math.floor(DebugGetMemoryUsage()/1000/1000).."MB", "demoFont", Vec2(0, 40), OriginType.topLeft)
-	UIDrawText("camera: ".. player.position.ToString(), "demoFont", Vec2(0, 60), OriginType.topLeft)
+	--UIDrawText("entities: ".. count, "demoFont", Vec2(0, 20), OriginType.topLeft)
+	UIDrawText("memory:".. math.floor(DebugGetMemoryUsage()/1000/1000).."MB", "demoFont", Vec2(0, 20), OriginType.topLeft)
+	--UIDrawText("camera: ".. player.position.ToString(), "demoFont", Vec2(0, 60), OriginType.topLeft)
 end
 

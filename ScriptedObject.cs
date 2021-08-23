@@ -43,7 +43,8 @@ namespace Snowball
             {
                 ModulePaths = new string[]
                 {
-                    Engine.scriptDirectory + "?.lua"
+                    Engine.scriptDirectory + "?.lua",
+                    Engine.engineScripts + "?.lua"
                 }
             };
             scriptedObject.script.DoFile(Engine.scriptDirectory + file);

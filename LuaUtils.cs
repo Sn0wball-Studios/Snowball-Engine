@@ -42,19 +42,15 @@ namespace Snowball
             File.WriteAllLines(Engine.scriptDirectory + name, output);
         }
 
-        public static Sprite LoadSprite(string spriteFile)
-        {
-            Sprite sprite = Json.Load<Sprite>(Engine.spriteDirectory + spriteFile);
-            sprite.Init(spriteFile);
-            return sprite;
-        }
+        
 
         public static void LoadGlobalFunctions(Script script, LuaObject obj)
         {
             script.Globals["CreateObject"] = (Func<Table, Table>)LuaObject.AddObject;
             script.Globals["DrawSprite"] = (Action<Sprite>)Engine.window.DrawSprite;
             script.Globals["dt"] = (Func<float>)LUA_GetDeltaTime;
-            script.Globals["LoadSprite"] = (Func<string, Sprite>)LoadSprite;
+            script.Globals["LoadSprite"] = (Func<string, Sprite>)Sprite.LoadSprite;
+            script.Globals["LoadIsometricSprite"] = (Func<string, Sprite>)Sprite.LoadIsometric;
             script.Globals["CreateSoundSource"] = (Func<string, SoundSource>)Engine.soundFactory.CreateSource;
             script.Globals["CreateScriptableObject"] = (Func<string, Vector2, ScriptedObject>)ScriptedObject.Create;
             script.Globals["InputIsKeyDown"] = (Func<KeyboardKey, bool>)Input.IsKeyDown;

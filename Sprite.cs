@@ -15,6 +15,20 @@ namespace Snowball
 
         public Vector2 size = new Vector2();
 
+        public static Sprite LoadSprite(string spriteFile)
+        {
+            Sprite sprite = Json.Load<Sprite>(Engine.spriteDirectory + spriteFile);
+            sprite.Init(spriteFile);
+            return sprite;
+        }
+
+        public static Sprite LoadIsometric(string spriteFile)
+        {
+            var sprite = LoadSprite(spriteFile);
+            sprite.origin = sprite.bounds.bottomCenter;
+            return sprite;
+        }
+
         [JsonIgnore]
         public BoundingBox bounds
         {

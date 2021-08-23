@@ -16,6 +16,8 @@ namespace Snowball
 
         public static string gameDirectory;
 
+        public const string engineScripts = "engineScripts/";
+
         public static string spriteDirectory
         {
             get
