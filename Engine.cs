@@ -82,6 +82,22 @@ namespace Snowball
             }
         }
 
+        public static string dllDirectory
+        {
+            get
+            {
+                return "backends/";
+            }
+        }
+
+        private static string defaultBackend
+        {
+            get
+            {
+                return "Default Backend";
+            }
+        }
+
         static void LoadGameConfig(string directory)
         {
             var config = File.ReadAllLines(directory + "game.conf");
@@ -96,14 +112,19 @@ namespace Snowball
 
         public static void LoadEngineConfig(string file)
         {
-            var config = File.ReadAllLines(file);
-            Console.WriteLine("Loading engine backend {0}...", config[0]);
-            var asm = Assembly.LoadFile(config[1]);
-            var winType = asm.GetType(config[2]);
-            var soundFactoryType = asm.GetType(config[3]);
+            var config = Json.Load<EngineConfig>(dllDirectory + file);
+            if(config.name.Equals(defaultBackend))
+            {
+                LoadDefaultConfig();
+            }
+
+             Console.WriteLine("Loading engine backend {0}...", config.name);
+             var asm = Assembly.LoadFile(Path.GetFullPath(dllDirectory + config.engineDLL));
+             var winType = asm.GetType(config.window);
+             var soundFactoryType = asm.GetType(config.soundFactory);
             
-            window = Activator.CreateInstance(winType) as WindowImplementation;
-            soundFactory = Activator.CreateInstance(soundFactoryType) as SoundFactory;
+             window = Activator.CreateInstance(winType) as WindowImplementation;
+             soundFactory = Activator.CreateInstance(soundFactoryType) as SoundFactory;
         }
 
         static void LoadDefaultConfig()
@@ -134,12 +155,14 @@ namespace Snowball
 
             foreach(var dir in importantDirs)
             {
-                Console.WriteLine("creating directory {0}", name + dir);
-                Directory.CreateDirectory(name + dir);
+                Console.WriteLine("creating directory {0}", dir);
+                Directory.CreateDirectory(dir);
             }
             
             LuaUtils.CreateLuaFile("load.lua");
         }
+
+        public static EngineConfig config;
 
 
         public static void Run(string[] args)
@@ -150,6 +173,7 @@ namespace Snowball
             
             gameDirectory = ((args.Length > 0) ? args[0] : defaultDirectory) + "/";
             
+
             if(args.Length > 1)
             {
                 LoadEngineConfig(args[1]);
@@ -166,7 +190,6 @@ namespace Snowball
             Console.WriteLine("starting lua{0}...", Script.LUA_VERSION);
             
             LuaUtils.LoadEngineClasses();
-            //ScriptedObject.Create("load.lua", new System.Numerics.Vector2());
             LuaObject.LoadLua();
             while(window.IsOpen())
             {

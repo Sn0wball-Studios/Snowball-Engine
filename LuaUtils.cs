@@ -31,15 +31,9 @@ namespace Snowball
         public static void CreateLuaFile(string name)
         {
             if(File.Exists(Engine.scriptDirectory + name)){return;}
-            string[] output = {
-                string.Format("--{0} created on {1} using {2}",name, DateTime.Now.ToString(), Engine.engineName),
-                "\n--called on object creation",
-                "function start()\nend\n",
-                "--called once per frame",
-                "function update()\nend"
-            };
-
-            File.WriteAllLines(Engine.scriptDirectory + name, output);
+            var className = name.Substring(0, name.LastIndexOf('.'));
+            string output = File.ReadAllText(Engine.engineScripts + "entitytemplate.lua").Replace("entity", className);
+            File.WriteAllText(Engine.scriptDirectory + name, output);
         }
 
         

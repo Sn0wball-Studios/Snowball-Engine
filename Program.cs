@@ -50,13 +50,22 @@ namespace Snowball
         {
             if(args.Length > 0)
             {
-                if(args[0].Equals("create"))
+                if(args[0].Equals("create") && args.Length < 2)
                 {
                     CreationState();
                    
                     
                     return;
-                }   
+                }
+                else if (args[0].Equals("create") && args.Length >= 2)
+                {
+                    if(args[1].Equals("game"))
+                    {
+                        Engine.CreateGameDirectory(args[2] + "/");
+                    }
+                    
+                }
+                return;
             }
             Engine.Run(args);
         }
