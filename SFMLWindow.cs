@@ -28,11 +28,16 @@ namespace Snowball
                 var sfFont = new Text("Sample Text <3", new Font(Engine.fontDirectory + font.Value.ttf))
                 {
                     CharacterSize = font.Value.size,
-                    FillColor = new Color(font.Value.r, font.Value.g, font.Value.b)
+                    FillColor = new SFML.Graphics.Color(font.Value.r, font.Value.g, font.Value.b)
                 };
                 
                 sfText.Add(font.Key, sfFont);
             }
+        }
+
+        public override void SetPixel(uint x, uint y, Color color)
+        {
+            throw new NotImplementedException();
         }
 
         public override void UIDrawText(string text, string font, Vector2 position, OriginType type)
@@ -138,8 +143,8 @@ namespace Snowball
 
         public override void Clear()
         {
-            uiTexture.Clear(Color.Transparent);
-            window.Clear(new Color(50,50,50));
+            uiTexture.Clear(SFML.Graphics.Color.Transparent);
+            window.Clear(new SFML.Graphics.Color(50,50,50));
 
         }
 
@@ -157,8 +162,8 @@ namespace Snowball
         }
         RectangleShape rectangleShape = new RectangleShape()
         {
-            FillColor = new Color(255, 0, 0, 100),
-            OutlineColor = Color.Red,
+            FillColor = new SFML.Graphics.Color(255, 0, 0, 100),
+            OutlineColor = SFML.Graphics.Color.Red,
             OutlineThickness = 1
         };
 

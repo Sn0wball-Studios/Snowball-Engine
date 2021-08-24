@@ -3,7 +3,7 @@ using System.Numerics;
 using System;
 namespace Snowball
 {
-    public abstract class WindowImplementation
+    public abstract class WindowImplementation : IRenderTarget
     {
         public abstract void PollEvents();
         public abstract void Create(uint width, uint height, string caption, uint fps=60);
@@ -23,6 +23,8 @@ namespace Snowball
         public abstract BoundingBox GetBounds(Sprite sprite);
         public abstract void CacheSprite(Sprite sprite);
         public abstract bool SpriteIsChached(Sprite sprite);
+        public abstract void SetPixel(uint x, uint y, Color color);
+
 
         public Dictionary<string, FontFile> fonts = new Dictionary<string, FontFile>();
 

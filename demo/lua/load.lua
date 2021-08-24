@@ -5,16 +5,16 @@ player = require("player")
 
 count = 1
 function start()
-	for i = 0, 2000 do
-		posy = i * 32
-		posx = math.sin(posy) * 32*3
+	-- for i = 0, 2000 do
+	-- 	posy = i * 32
+	-- 	posx = math.sin(posy) * 32*3
 
-		CreateObject(scientist:create(Vec2(posx, posy)))
+	-- 	CreateObject(scientist:create(Vec2(posx, posy)))
 
 		
 
-		count = count + 1
-	end
+	-- 	count = count + 1
+	-- end
 
 	player = CreateObject(player:create(Vec2(0, 0)))
 	
