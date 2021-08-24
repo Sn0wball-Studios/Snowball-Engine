@@ -22,15 +22,11 @@ namespace Snowball
         public abstract Vector2 GetSpriteSize(Sprite sprite);
         public abstract BoundingBox GetBounds(Sprite sprite);
         public abstract void CacheSprite(Sprite sprite);
-<<<<<<< HEAD
         public abstract bool SpriteIsChached(Sprite sprite);
         public abstract void SetPixel(uint x, uint y, Color color);
 
-
-=======
         public abstract Sprite LoadFromBuffer(uint width, uint height, byte[] buffer, string name);
         public abstract void DebugDrawBox(BoundingBox box);
->>>>>>> c853c5d314352c41108e9adca1c6a6586d3c34e9
         public Dictionary<string, FontFile> fonts = new Dictionary<string, FontFile>();
 
         public Vector2 size = new Vector2();

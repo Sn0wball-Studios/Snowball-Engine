@@ -35,11 +35,11 @@ namespace Snowball
             }
         }
 
-<<<<<<< HEAD
         public override void SetPixel(uint x, uint y, Color color)
         {
             throw new NotImplementedException();
-=======
+        }
+
         public override Sprite LoadFromBuffer(uint width, uint height, byte[] buffer, string name)
         {
             Sprite sprite = new Sprite()
@@ -51,7 +51,11 @@ namespace Snowball
             var sfSprite = SFMLUtils.CreateSfSprite(width, height, buffer);
             sfSprites.Add(sprite.textureFile, sfSprite);
             return sprite;
->>>>>>> c853c5d314352c41108e9adca1c6a6586d3c34e9
+        }
+
+        public override bool SpriteIsChached(Sprite sprite)
+        {
+            return sfSprites.ContainsKey(sprite.textureFile);
         }
 
         public override void UIDrawText(string text, string font, Vector2 position, OriginType type)
