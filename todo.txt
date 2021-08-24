@@ -1,6 +1,0 @@
-scripting:
-
-    figure out a better way to have 2 characters work in the same while loop,
-    as calling action for a second character followed by a yield will make following instructions
-    fail to execute
-
