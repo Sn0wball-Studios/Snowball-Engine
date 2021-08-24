@@ -35,7 +35,7 @@ namespace Snowball
 
         public static SFML.Graphics.Sprite CreateSfSprite(Sprite sprite)
         {
-            return new SFML.Graphics.Sprite(new Texture(Engine.spriteDirectory + sprite.textureFile))
+            return new SFML.Graphics.Sprite(new Texture(DirectoryConsts.spriteDirectory + sprite.textureFile))
             {
                 Origin = new Vector2f(sprite.origin.X, sprite.origin.Y)
             };

@@ -69,11 +69,11 @@ namespace Snowball
             {
                 ModulePaths = new string[]
                 {
-                    Engine.scriptDirectory + "?.lua"
+                    DirectoryConsts.scriptDirectory + "?.lua"
                 }
             };
             LuaUtils.LoadGlobalFunctions(script, new LuaObject());
-            script.DoFile(Engine.scriptDirectory + "load.lua");
+            script.DoFile(DirectoryConsts.scriptDirectory + "load.lua");
 
             ((Closure)script.Globals["start"]).Call();
         }

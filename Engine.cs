@@ -18,78 +18,6 @@ namespace Snowball
 
         public const string engineScripts = "engineScripts/";
 
-        public static string spriteDirectory
-        {
-            get
-            {
-                return gameDirectory + "sprites/";
-            }
-        }
-
-        public static string scriptDirectory
-        {
-            get
-            {
-                return gameDirectory + "lua/";
-            }
-        }
-
-        public static string soundDirectory
-        {
-            get
-            {
-                return gameDirectory + "sfx/";
-            }
-        }
-
-        public static string musicDirectory
-        {
-            get
-            {
-                return gameDirectory + "music/";
-            }
-        }
-
-        public static string inputDirectory
-        {
-            get
-            {
-                return gameDirectory + "input/";
-            }
-        }
-
-        public static string fontDirectory
-        {
-            get
-            {
-                return gameDirectory + "fonts/";
-            }
-        }
-
-        public static string sceneDirectory
-        {
-            get
-            {
-                return gameDirectory + "scenes/";
-            }
-        }
-
-        public static string prefabDirectory
-        {
-            get
-            {
-                return gameDirectory + "prefabs/";
-            }
-        }
-
-        public static string dllDirectory
-        {
-            get
-            {
-                return "backends/";
-            }
-        }
-
         private static string defaultBackend
         {
             get
@@ -112,14 +40,14 @@ namespace Snowball
 
         public static void LoadEngineConfig(string file)
         {
-            var config = Json.Load<EngineConfig>(dllDirectory + file);
+            var config = Json.Load<EngineConfig>(DirectoryConsts.dllDirectory + file);
             if(config.name.Equals(defaultBackend))
             {
                 LoadDefaultConfig();
             }
 
              Console.WriteLine("Loading engine backend {0}...", config.name);
-             var asm = Assembly.LoadFile(Path.GetFullPath(dllDirectory + config.engineDLL));
+             var asm = Assembly.LoadFile(Path.GetFullPath(DirectoryConsts.dllDirectory + config.engineDLL));
              var winType = asm.GetType(config.window);
              var soundFactoryType = asm.GetType(config.soundFactory);
             
@@ -141,14 +69,14 @@ namespace Snowball
 
             string[] importantDirs = new string[]
             {
-                scriptDirectory,
-                spriteDirectory,
-                soundDirectory,
-                musicDirectory,
-                sceneDirectory,
-                prefabDirectory,
-                inputDirectory,
-                fontDirectory
+                DirectoryConsts.scriptDirectory,
+                DirectoryConsts.spriteDirectory,
+                DirectoryConsts.soundDirectory,
+                DirectoryConsts.musicDirectory,
+                DirectoryConsts.sceneDirectory,
+                DirectoryConsts.prefabDirectory,
+                DirectoryConsts.inputDirectory,
+                DirectoryConsts.fontDirectory
             };
 
             Console.WriteLine("Creating new game {0}", name);

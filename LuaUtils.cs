@@ -10,7 +10,6 @@ namespace Snowball
         public static void LoadEngineClasses()
         {
             UserData.RegisterType<Vector2>();
-            UserData.RegisterType<ScriptedObject>();
             UserData.RegisterType<SoundSource>();
             UserData.RegisterType<SoundFactory>();
             UserData.RegisterType<KeyboardKey>();
@@ -30,10 +29,10 @@ namespace Snowball
 
         public static void CreateLuaFile(string name)
         {
-            if(File.Exists(Engine.scriptDirectory + name)){return;}
+            if(File.Exists(DirectoryConsts.scriptDirectory + name)){return;}
             var className = name.Substring(0, name.LastIndexOf('.'));
             string output = File.ReadAllText(Engine.engineScripts + "entitytemplate.lua").Replace("entity", className);
-            File.WriteAllText(Engine.scriptDirectory + name, output);
+            File.WriteAllText(DirectoryConsts.scriptDirectory + name, output);
         }
 
         
@@ -46,16 +45,12 @@ namespace Snowball
             script.Globals["LoadSprite"] = (Func<string, Sprite>)Sprite.LoadSprite;
             script.Globals["LoadIsometricSprite"] = (Func<string, Sprite>)Sprite.LoadIsometric;
             script.Globals["CreateSoundSource"] = (Func<string, SoundSource>)Engine.soundFactory.CreateSource;
-            script.Globals["CreateScriptableObject"] = (Func<string, Vector2, ScriptedObject>)ScriptedObject.Create;
             script.Globals["InputIsKeyDown"] = (Func<KeyboardKey, bool>)Input.IsKeyDown;
             script.Globals["InputGetAxis"] = (Func<string, float>)Input.GetAxis;
-            script.Globals["GetScriptedObjectByID"] = (Func<string, ScriptedObject>)ScriptedObject.GetScriptedObjectByID;
             script.Globals["Random"] = (Func<float>)Rng.RandomFloat;
             script.Globals["RandomRange"] = (Func<int, int, int>)Rng.Range;
             script.Globals["DrawText"] = (Action<string, string, Vector2, OriginType>)Engine.window.DrawText;
             script.Globals["UIDrawText"] = (Action<string, string, Vector2, OriginType>)Engine.window.UIDrawText;
-            script.Globals["GetObjectsWithID"] = (Func<string, ScriptedObject[]>)ScriptedObject.GetObjectsWithID;
-            script.Globals["GetObjectsWithTag"] = (Func<string, ScriptedObject[]>)ScriptedObject.GetObjectsWithTag;
             script.Globals["Vec2"] = (Func<float, float, Vector2>)Vec2Utils.CreateVec2;
             script.Globals["SetCameraPosition"] = (Action<Vector2>)Engine.window.SetCamera;
             script.Globals["Vec2GetAngle"] = (Func<Vector2, Vector2, float>)Vec2Utils.GetAngle;
@@ -68,9 +63,6 @@ namespace Snowball
 
             //debug stuff
             script.Globals["DebugGetMemoryUsage"] = (Func<long>)Debug.GetMemoryUsage;
-
-            //fast math
-            script.Globals["sin"] = (Func<float, float>)FastMath.Sin;
         }
 
         

@@ -8,13 +8,13 @@ namespace Snowball
     {
         public override object LoadFile(string file, Table globalContext)
         {
-            return File.ReadAllText(Engine.scriptDirectory + file);
+            return File.ReadAllText(DirectoryConsts.scriptDirectory + file);
 
         }
 
         public override bool ScriptFileExists(string name)
         {
-            return File.Exists(Engine.scriptDirectory + name);
+            return File.Exists(DirectoryConsts.scriptDirectory + name);
         }
     }
 }

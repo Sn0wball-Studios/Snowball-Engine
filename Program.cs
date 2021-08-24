@@ -28,7 +28,7 @@ namespace Snowball
                 var icon = Console.ReadLine();
                 icon = (icon.Length > 0) ? icon : "empty.json";
 
-                var prefabs = Json.LoadDirectory<Prefab>(Engine.prefabDirectory);
+                var prefabs = Json.LoadDirectory<Prefab>(DirectoryConsts.prefabDirectory);
 
                 uint maxID = 0;
                 foreach(var prefab in prefabs)
@@ -41,7 +41,7 @@ namespace Snowball
                 p.luaScript = lua;
                 p.editorGraphic = icon;
 
-                Json.Save(Engine.prefabDirectory + name + ".json", p);
+                Json.Save(DirectoryConsts.prefabDirectory + name + ".json", p);
                 LuaUtils.CreateLuaFile(lua);
 
         }

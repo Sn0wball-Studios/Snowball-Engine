@@ -17,7 +17,7 @@ namespace Snowball
 
         public static Sprite LoadSprite(string spriteFile)
         {
-            Sprite sprite = Json.Load<Sprite>(Engine.spriteDirectory + spriteFile);
+            Sprite sprite = Json.Load<Sprite>(DirectoryConsts.spriteDirectory + spriteFile);
             sprite.Init(spriteFile);
             return sprite;
         }
@@ -45,7 +45,7 @@ namespace Snowball
             {
                 Engine.window.CacheSprite(this);
                 size = Engine.window.GetSpriteSize(this);
-                Json.Save(Engine.spriteDirectory + json, this);
+                Json.Save(DirectoryConsts.spriteDirectory + json, this);
             }
         }
     }

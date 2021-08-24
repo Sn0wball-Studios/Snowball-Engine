@@ -25,7 +25,7 @@ namespace Snowball
         {
             foreach(var font in fonts)
             {
-                var sfFont = new Text("Sample Text <3", new Font(Engine.fontDirectory + font.Value.ttf))
+                var sfFont = new Text("Sample Text <3", new Font(DirectoryConsts.fontDirectory + font.Value.ttf))
                 {
                     CharacterSize = font.Value.size,
                     FillColor = new SFML.Graphics.Color(font.Value.r, font.Value.g, font.Value.b)

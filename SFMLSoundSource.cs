@@ -9,7 +9,7 @@ namespace Snowball
 
         public SFMLSoundSource(string filename)
         {
-            sound = new Sound(new SoundBuffer(Engine.soundDirectory + filename));
+            sound = new Sound(new SoundBuffer(DirectoryConsts.soundDirectory + filename));
         }
 
         public override void Pause()

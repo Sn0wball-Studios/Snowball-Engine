@@ -16,7 +16,7 @@ namespace Snowball
         public static void LoadDefs()
         {
             Console.WriteLine("loading input axes...");
-            axes = Json.Load<Dictionary<string, InputAxis>>(Engine.inputDirectory + "axes.json");
+            axes = Json.Load<Dictionary<string, InputAxis>>(DirectoryConsts.inputDirectory + "axes.json");
         }
 
 
