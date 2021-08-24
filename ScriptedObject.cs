@@ -12,8 +12,6 @@ namespace Snowball
         public Script script = new Script();
         public Vector2 position = new Vector2();
         public Vector2 velocity = new Vector2();
-        public readonly List<ObjectManipulator> manipulators = new List<ObjectManipulator>();
-        public readonly List<ObjectTargetManipulator> newManipulators = new List<ObjectTargetManipulator>();
         public float rotation;
 
         public BoundingBox boundingBox = new BoundingBox(new Vector2(0,0));
@@ -103,43 +101,8 @@ namespace Snowball
             boundingBox.min = position;
             DoFunction("update");
 
-            foreach(var manipulator in newManipulators)
-            {
-                manipulators.Add(manipulator);
-            }
-            newManipulators.Clear();
-
-
-            for(int i = 0; i < manipulators.Count; i++)
-            {
-                
-                if(manipulators[i].Update())
-                {
-                    if(scriptedSequenceManager == null)
-                    {
-                        Console.WriteLine("attempting to call scripted sequence on {0} but {0} does not have a scripted sequence manager", id);
-                        break;
-                    }
-
-                    ((Closure)(scriptedSequenceManager["IssueNextTask"]))?.Call(this);                     
-                }
-            }
             
-            List<ObjectManipulator> remove = new List<ObjectManipulator>();
-            for(int i = 0 ; i < manipulators.Count; i++)
-            {
-                if(manipulators[i].complete)
-                {
-                    remove.Add(manipulators[i]);
-                }
-            }
-            
-            foreach(var i in remove)
-            {
-                manipulators.Remove(i);
-                
-            }
-
+           
             //draw sprites
             foreach(var sprite in sprites)
             {
