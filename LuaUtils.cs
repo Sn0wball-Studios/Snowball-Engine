@@ -63,11 +63,6 @@ namespace Snowball
             script.Globals["Vec2GetLength"] = (Func<Vector2, float>)Vec2Utils.Length;
             script.Globals["Vec2Distance"] = (Func<Vector2, Vector2, float>)Vec2Utils.Distance;
 
-            //manipulator functions
-            script.Globals["MoveObject"] = (Action<ScriptedObject, Vector2, float>)ScriptedSequences.LUA_MoveToLocation;
-            script.Globals["Say"] = (Action<ScriptedObject, string, float, string>)ScriptedSequences.LUA_Say;
-            script.Globals["Delay"] = (Action<ScriptedObject, float>)ScriptedSequences.LUA_Delay;
-        
             //enums
             script.Globals["OriginType"] = UserData.CreateStatic<OriginType>();
 
