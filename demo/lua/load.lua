@@ -4,8 +4,10 @@ player = require("player")
 
 
 count = 1
+
+time = 0
 function start()
-	for i = 1, 2000 do
+	for i = 1, 200 do
 		posy = i * 32
 		posx = math.sin(posy) * 32*3
 
@@ -20,11 +22,16 @@ function start()
 	
 end
 
+Color = color(0,0,0,255)
+
 
 function update()  
 	UIDrawText("FPS:".. math.floor(1/dt()), "demoFont", Vec2(0,0), OriginType.topLeft)
 	UIDrawText("entities: ".. count, "demoFont", Vec2(0, 20), OriginType.topLeft)
 	UIDrawText("memory:".. math.floor(DebugGetMemoryUsage()/1000/1000).."MB", "demoFont", Vec2(0, 40), OriginType.topLeft)
 	--UIDrawText("camera: ".. player.position.ToString(), "demoFont", Vec2(0, 60), OriginType.topLeft)
+	box = BoundingBox(Vec2(0,0))
+	DrawBox(box, self.color)
+
 end
 

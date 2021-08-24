@@ -11,6 +11,6 @@ namespace Snowball
         public abstract void Present();
         public abstract void SetPixel(uint x, uint y, Color color);
         public abstract void UIDrawText(string text, string font, Vector2 position, OriginType type);
-        public abstract void DebugDrawBox(BoundingBox box);
+        public abstract void DrawBox(BoundingBox box, Color color);
     }
 }

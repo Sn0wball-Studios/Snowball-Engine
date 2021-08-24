@@ -34,8 +34,15 @@ namespace Snowball
         {
             get
             {
-                return Engine.window.GetBounds(this);
+                return GetBounds();
             }
+        }
+
+        public BoundingBox GetBounds()
+        {
+            BoundingBox output = new BoundingBox(new Vector2(size.X, size.Y) * 1.5f);
+            output.min =  position - (size / 1.5f);
+            return output;
         }
 
         //bri'ish sprite

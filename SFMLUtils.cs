@@ -25,6 +25,11 @@ namespace Snowball
             return new Vector2(vec.X, vec.Y);
         }
 
+        public static SFML.Graphics.Color ColortoSfColor(Color color)
+        {
+            return new SFML.Graphics.Color(color.r, color.g, color.b, color.a);
+        }
+
         public static SFML.Graphics.Sprite CreateSfSprite(uint width, uint height, byte[] buffer)
         {
             Image img = new Image(width, height, buffer);

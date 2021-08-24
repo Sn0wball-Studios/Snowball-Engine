@@ -16,5 +16,12 @@ namespace Snowball
             this.b = b;
             this.a = a;
         }
+
+        public static Color CreateColor(byte r, byte g, byte b, byte a = 255)
+        {
+            return new Color(r,g,b,a);
+        }
+
+        public static readonly Color Red = new Color(255, 0, 0);
     }
 }

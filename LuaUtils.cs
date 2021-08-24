@@ -15,8 +15,8 @@ namespace Snowball
             UserData.RegisterType<KeyboardKey>();
             UserData.RegisterType<BoundingBox>();
             UserData.RegisterType<OriginType>();
-            UserData.RegisterType<Script>();
             UserData.RegisterType<Sprite>();
+            UserData.RegisterType<Color>();
         }
 
         
@@ -57,7 +57,9 @@ namespace Snowball
             script.Globals["Vec2GetDirection"] = (Func<Vector2, Vector2, Vector2>)Vec2Utils.GetDirection;
             script.Globals["Vec2GetLength"] = (Func<Vector2, float>)Vec2Utils.Length;
             script.Globals["Vec2Distance"] = (Func<Vector2, Vector2, float>)Vec2Utils.Distance;
-
+            script.Globals["Color"] = (Func<byte,byte,byte,byte,Color>)Color.CreateColor;
+            script.Globals["DrawBox"] = (Action<BoundingBox,Color>)Engine.window.DrawBox;
+            script.Globals["BoundingBox"] = (Func<Vector2, BoundingBox>)BoundingBox.Create;
             //enums
             script.Globals["OriginType"] = UserData.CreateStatic<OriginType>();
 

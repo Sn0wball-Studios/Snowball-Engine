@@ -43,6 +43,11 @@ namespace Snowball
             }
         }
 
+        public static BoundingBox Create(Vector2 size)
+        {
+            return new BoundingBox(size);
+        }
+
         public void SetOrigin(OriginType type)
         {
             switch (type)

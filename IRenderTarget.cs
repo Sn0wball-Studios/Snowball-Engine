@@ -9,6 +9,6 @@ namespace Snowball
         void DrawSprite(Sprite sprite);
         void UIDrawText(string text, string font, Vector2 position, OriginType type);
         void DrawText(string text, string font, Vector2 position, OriginType type);
-        void DebugDrawBox(BoundingBox box);
+        void DrawBox(BoundingBox box, Color color);
     }
 }

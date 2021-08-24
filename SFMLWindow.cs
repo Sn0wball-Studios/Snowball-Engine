@@ -14,14 +14,12 @@ namespace Snowball
         private readonly Clock deltaClock = new Clock();
         readonly static Dictionary<string, SFML.Graphics.Sprite> sfSprites = new Dictionary<string, SFML.Graphics.Sprite>();
         readonly Dictionary<string, Text> sfText = new Dictionary<string, Text>();
-
         RectangleShape rectangleShape = new RectangleShape()
         {
             FillColor = new SFML.Graphics.Color(255, 0, 0, 100),
             OutlineColor = SFML.Graphics.Color.Red,
             OutlineThickness = 1
         };
-
 
         public override void Close()
         {
@@ -118,21 +116,14 @@ namespace Snowball
             return SFMLUtils.Vec2uToVec2(sfSprite.Texture.Size);
         }
 
-        public override BoundingBox GetBounds(Sprite sprite)
-        {
-            BoundingBox output = new BoundingBox(new Vector2(sprite.size.X, sprite.size.Y) * 1.5f);
-            output.min =  sprite.position - (sprite.size / 1.5f);
-            return output;
-        }
-
-        public override void DebugDrawBox(BoundingBox box)
+        public override void DrawBox(BoundingBox box, Color color)
         {
             rectangleShape.Size = SFMLUtils.Vec2ToVec2f(box.size);
+            rectangleShape.FillColor = SFMLUtils.ColortoSfColor(color);
             rectangleShape.Position = SFMLUtils.Vec2ToVec2f(box.min - (camera - size/2));
             window.Draw(rectangleShape);
         }
         
-
         public override bool IsOpen()
         {
             return window.IsOpen;
@@ -171,14 +162,13 @@ namespace Snowball
             sfSprites.Add(sprite.textureFile, sfSprite);
         }
 
-
         public override void DrawSprite(Snowball.Sprite sprite)
         {
             if(!IsOnScreen(sprite))
             {
                 return;
             }
-            DebugDrawBox(sprite.bounds);
+            //DrawBox(sprite.bounds, Color.Red);
             var sfSprite = sfSprites[sprite.textureFile];
             sfSprite.Position = SFMLUtils.Vec2ToVec2f(sprite.position - (camera - size/2));
             sfSprite.Rotation = sprite.rotation;
