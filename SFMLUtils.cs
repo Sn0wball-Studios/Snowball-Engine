@@ -25,6 +25,14 @@ namespace Snowball
             return new Vector2(vec.X, vec.Y);
         }
 
+        public static SFML.Graphics.Sprite CreateSfSprite(uint width, uint height, byte[] buffer)
+        {
+            Image img = new Image(width, height, buffer);
+            SFML.Graphics.Sprite sprite = new SFML.Graphics.Sprite(new Texture(img));
+            img.Dispose();
+            return sprite;
+        }
+
         public static SFML.Graphics.Sprite CreateSfSprite(Sprite sprite)
         {
             return new SFML.Graphics.Sprite(new Texture(Engine.spriteDirectory + sprite.textureFile))

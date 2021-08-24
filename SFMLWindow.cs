@@ -35,6 +35,19 @@ namespace Snowball
             }
         }
 
+        public override Sprite LoadFromBuffer(uint width, uint height, byte[] buffer, string name)
+        {
+            Sprite sprite = new Sprite()
+            {
+                textureFile = name,
+                size = new Vector2(width, height)
+            };
+
+            var sfSprite = SFMLUtils.CreateSfSprite(width, height, buffer);
+            sfSprites.Add(sprite.textureFile, sfSprite);
+            return sprite;
+        }
+
         public override void UIDrawText(string text, string font, Vector2 position, OriginType type)
         {
             var textBox = sfText[font];
@@ -208,10 +221,6 @@ namespace Snowball
             sfSprites.Add(sprite.textureFile, sfSprite);
         }
 
-        public override bool SpriteIsChached(Sprite sprite)
-        {
-            return sfSprites.ContainsKey(sprite.textureFile);
-        }
         
         readonly static Dictionary<string, SFML.Graphics.Sprite> sfSprites = new Dictionary<string, SFML.Graphics.Sprite>();
 
