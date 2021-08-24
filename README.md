@@ -4,7 +4,6 @@ light weight modular game engine
 ## features
 - easy lua api.
 - can be easily ported to your game library of choice(SDL2, OpenTK, etc).
-- scripted sequences. 
 <br></br>
 ## creating a game
 to create a game simply run "./Snowball create game GameName" this will create a new skeleton game in the GameName directory
