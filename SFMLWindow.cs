@@ -8,18 +8,25 @@ namespace Snowball
 {
     internal class SFMLWindow : WindowImplementation
     {
-        
         private RenderWindow window;
         private RenderTexture uiTexture;
         private SFML.Graphics.Sprite uiSprite;
         private readonly Clock deltaClock = new Clock();
+        readonly static Dictionary<string, SFML.Graphics.Sprite> sfSprites = new Dictionary<string, SFML.Graphics.Sprite>();
+        readonly Dictionary<string, Text> sfText = new Dictionary<string, Text>();
+
+        RectangleShape rectangleShape = new RectangleShape()
+        {
+            FillColor = new SFML.Graphics.Color(255, 0, 0, 100),
+            OutlineColor = SFML.Graphics.Color.Red,
+            OutlineThickness = 1
+        };
+
 
         public override void Close()
         {
             window.Close();
         }
-
-        readonly Dictionary<string, Text> sfText = new Dictionary<string, Text>();
 
         public override void ProcessFonts()
         {
@@ -47,7 +54,6 @@ namespace Snowball
                 textureFile = name,
                 size = new Vector2(width, height)
             };
-
             var sfSprite = SFMLUtils.CreateSfSprite(width, height, buffer);
             sfSprites.Add(sprite.textureFile, sfSprite);
             return sprite;
@@ -58,78 +64,19 @@ namespace Snowball
             return sfSprites.ContainsKey(sprite.textureFile);
         }
 
-        public override void UIDrawText(string text, string font, Vector2 position, OriginType type)
+        public override void UIDrawText(string text, string font, Vector2 position, OriginType originType)
         {
-            var textBox = sfText[font];
-            var textSize = textBox.GetGlobalBounds();
-            BoundingBox b = new BoundingBox(new Vector2(textSize.Width, textSize.Height));
-            textBox.DisplayedString = text;
-            Vector2 textOrigin = new Vector2();
-            switch (type)
-            {
-                case OriginType.topLeft:
-                    break;
-                case OriginType.topCenter:
-                    textOrigin = b.topCenter;
-                    break;
-                case OriginType.topRight:
-                    break;
-                case OriginType.centerLeft:
-                    break;
-                case OriginType.centerCenter:
-                    break;
-                case OriginType.centerRight:
-                    break;
-                case OriginType.bottomLeft:
-                    break;
-                case OriginType.bottomCenter:
-                    textOrigin = b.bottomCenter;
-                    break;
-                case OriginType.bottomRight:
-                    break;
-            }
-            textBox.Origin = SFMLUtils.Vec2ToVec2f(Vec2Utils.CastToIntVec(textOrigin));
-            var pos = Vec2Utils.CastToIntVec(position);
-            textBox.Position = SFMLUtils.Vec2ToVec2f(pos);
-            uiTexture.Draw(textBox);
+            DrawText(text, font, position + (camera - size/2), originType);
         }
 
-        public override void DrawText(string text, string font, Vector2 position, OriginType type)
+        public override void DrawText(string text, string font, Vector2 position, OriginType originType)
         {
             var textBox = sfText[font];
             var textSize = textBox.GetLocalBounds();
-            BoundingBox b = new BoundingBox(new Vector2(textSize.Width, textSize.Height));
+            BoundingBox textBounds = new BoundingBox(new Vector2(textSize.Width, textSize.Height));
             textBox.DisplayedString = text;
-            Vector2 textOrigin = new Vector2();
-            switch (type)
-            {
-                case OriginType.topLeft:
-                    textOrigin = new Vector2();
-                    break;
-                case OriginType.topCenter:
-                    textOrigin = b.topCenter;
-                    break;
-                case OriginType.topRight:
-                    break;
-                case OriginType.centerLeft:
-                    break;
-                case OriginType.centerCenter:
-                    break;
-                case OriginType.centerRight:
-                    break;
-                case OriginType.bottomLeft:
-                    break;
-                case OriginType.bottomCenter:
-                    textOrigin = b.bottomCenter;
-                    break;
-                case OriginType.bottomRight:
-                    break;
-                default:
-                    textOrigin = new Vector2();
-                    break;
-
-            }
-            textBox.Origin = SFMLUtils.Vec2ToVec2f(textOrigin);
+            textBounds.SetOrigin(originType);
+            textBox.Origin = SFMLUtils.Vec2ToVec2f(textBounds.origin);
             var pos = Vec2Utils.CastToIntVec((position) - (camera - size/2));
             textBox.Position = SFMLUtils.Vec2ToVec2f(pos);
             uiTexture.Draw(textBox);
@@ -163,7 +110,6 @@ namespace Snowball
         {
             uiTexture.Clear(SFML.Graphics.Color.Transparent);
             window.Clear(new SFML.Graphics.Color(50,50,50));
-
         }
 
         public override Vector2 GetSpriteSize(Sprite sprite)
@@ -178,12 +124,6 @@ namespace Snowball
             output.min =  sprite.position - (sprite.size / 1.5f);
             return output;
         }
-        RectangleShape rectangleShape = new RectangleShape()
-        {
-            FillColor = new SFML.Graphics.Color(255, 0, 0, 100),
-            OutlineColor = SFML.Graphics.Color.Red,
-            OutlineThickness = 1
-        };
 
         public override void DebugDrawBox(BoundingBox box)
         {
@@ -231,11 +171,6 @@ namespace Snowball
             sfSprites.Add(sprite.textureFile, sfSprite);
         }
 
-        
-        readonly static Dictionary<string, SFML.Graphics.Sprite> sfSprites = new Dictionary<string, SFML.Graphics.Sprite>();
-
-
-
 
         public override void DrawSprite(Snowball.Sprite sprite)
         {
@@ -243,7 +178,6 @@ namespace Snowball
             {
                 return;
             }
-
             DebugDrawBox(sprite.bounds);
             var sfSprite = sfSprites[sprite.textureFile];
             sfSprite.Position = SFMLUtils.Vec2ToVec2f(sprite.position - (camera - size/2));

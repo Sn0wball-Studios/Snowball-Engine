@@ -43,13 +43,41 @@ namespace Snowball
             }
         }
 
+        public void SetOrigin(OriginType type)
+        {
+            switch (type)
+            {
+                case OriginType.topLeft:
+                    origin = new Vector2();
+                    break;
+                case OriginType.topCenter:
+                    origin = topCenter;
+                    break;
+                case OriginType.topRight:
+                    origin = topRight;  
+                    break;
+                case OriginType.centerLeft:
+                    break;
+                case OriginType.centerCenter:
+                    break;
+                case OriginType.centerRight:
+                    break;
+                case OriginType.bottomLeft:
+                    break;
+                case OriginType.bottomCenter:
+                    origin = bottomCenter;
+                    break;
+                case OriginType.bottomRight:
+                    break;
+            }
+        }
+
         public static bool AABB(BoundingBox A, BoundingBox B)
         {
             return A.min.X <= B.max.X &&
                 A.max.X >= B.min.X &&
                 A.min.Y <= B.max.Y &&
                 A.max.Y >= B.min.Y;
-
         }
 
         public BoundingBox(Vector2 size)
