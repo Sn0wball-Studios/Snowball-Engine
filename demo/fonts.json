@@ -1,0 +1,27 @@
+{
+  "demoFont": {
+    "ttf": "alagard.ttf",
+    "size": 16,
+    "r": 0,
+    "g": 255,
+    "b": 0
+  },
+  "npcSpeech": {
+    "ttf": "Early GameBoy.ttf",
+    "size": 10
+  },
+  "npcName": {
+    "ttf": "Early GameBoy.ttf",
+    "size": 8,
+    "r": 18,
+    "g": 255,
+    "b": 93
+  },
+  "zombieSpeech": {
+    "ttf": "Early GameBoy.ttf",
+    "size": 8,
+    "r": 166,
+    "g": 0,
+    "b": 0
+  }
+}
