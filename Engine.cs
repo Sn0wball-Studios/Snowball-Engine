@@ -42,7 +42,7 @@ namespace Snowball
                 name = title
             };
 
-            BBQLib.BBQLib.Init(winConfig, BackendType.SDL);
+            BBQLib.BBQLib.Init(winConfig, BackendType.SFML);
         }
 
 
