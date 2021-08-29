@@ -20,8 +20,8 @@ end
 
 
 function player.update(self)
-    self.position.X = self.position.X + InputGetAxis("horizontal") * self.speed * dt()
-	self.position.Y = self.position.Y + -InputGetAxis("vertical") * self.speed * dt()
+    self.position.X = self.position.X + InputGetAxis("horizontal") * self.speed * dt
+	self.position.Y = self.position.Y + -InputGetAxis("vertical") * self.speed * dt
 	SetCameraPosition(self.position)
 end
 

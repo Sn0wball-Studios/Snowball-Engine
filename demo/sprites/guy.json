@@ -1,14 +1,19 @@
 {
-  "$id": "1",
-  "origin": {
-    "$id": "2",
-    "X": 7.0,
-    "Y": 15.0
+  "position": {
+    "X": 0.0,
+    "Y": 0.0
   },
-  "textureFile": "guy.png",
-  "size": {
-    "$id": "3",
-    "X": 32.0,
-    "Y": 32.0
-  }
+  "origin": {
+    "X": 0.0,
+    "Y": 0.0
+  },
+  "scale": {
+    "X": 1.0,
+    "Y": 1.0
+  },
+  "rotation": 0.0,
+  "layer": 0,
+  "drawn": false,
+  "repeat": false,
+  "textureFile": "sprites/guy.png"
 }

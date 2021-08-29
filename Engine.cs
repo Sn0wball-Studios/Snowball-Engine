@@ -3,13 +3,11 @@ using System;
 using System.Reflection;
 using Newtonsoft.Json;
 using MoonSharp.Interpreter;
+using BBQLib;
 namespace Snowball
 {
     public static class Engine
     {
-        public static WindowImplementation window;
-        public static SoundFactory soundFactory;
-
         const string defaultDirectory = "demo";
         public const string engineName = "Sn0wballEngine V6.0";
         public static float deltaTime;
@@ -35,33 +33,18 @@ namespace Snowball
             var height = uint.Parse(config[1]);
             var fps = uint.Parse(config[2]);
             var title = config[3];
-            window.Create(width, height, title, fps);
 
-        }
-
-        public static void LoadEngineConfig(string file)
-        {
-            var config = Json.Load<EngineConfig>(DirectoryConsts.dllDirectory + file);
-            if(config.name.Equals(defaultBackend))
+            WindowConfig winConfig = new WindowConfig()
             {
-                LoadDefaultConfig();
-            }
+                width = width,
+                height = height,
+                fps = fps,
+                name = title
+            };
 
-             Console.WriteLine("Loading engine backend {0}...", config.name);
-             var asm = Assembly.LoadFile(Path.GetFullPath(DirectoryConsts.dllDirectory + config.engineDLL));
-             var winType = asm.GetType(config.window);
-             var soundFactoryType = asm.GetType(config.soundFactory);
-            
-             window = Activator.CreateInstance(winType) as WindowImplementation;
-             soundFactory = Activator.CreateInstance(soundFactoryType) as SoundFactory;
+            BBQLib.BBQLib.Init(winConfig, BackendType.SDL);
         }
 
-        static void LoadDefaultConfig()
-        {
-            Console.WriteLine("Loading default SFML engine backend...");
-            window = new SFMLWindow();
-            soundFactory = new SFMLSoundFactory();
-        }
 
         public static void CreateGameDirectory(string name)
         {
@@ -91,9 +74,6 @@ namespace Snowball
             LuaUtils.CreateLuaFile("load.lua");
         }
 
-        public static EngineConfig config;
-
-
         public static void Run(string[] args)
         {
             Console.WriteLine("{0} created by BBQGiraffe running on {1}", engineName, Environment.OSVersion);
@@ -101,34 +81,23 @@ namespace Snowball
             Json.InitSettings();
             
             gameDirectory = ((args.Length > 0) ? args[0] : defaultDirectory) + "/";
-            
-
-            if(args.Length > 1)
-            {
-                LoadEngineConfig(args[1]);
-            }else{
-                LoadDefaultConfig();
-            }
 
             
             LoadGameConfig(gameDirectory);
-            Input.LoadDefs();
-
-            window.LoadFonts();
+            Input.LoadAxisFile(DirectoryConsts.inputDirectory + "axes.json");
+            BBQLib.BBQLib.rootDirectory = gameDirectory;
+            BBQLib.BBQLib.LoadFonts("fonts.json");
 
             Console.WriteLine("starting lua{0}...", Script.LUA_VERSION);
             
             LuaUtils.LoadEngineClasses();
             LuaObject.LoadLua();
-            while(window.IsOpen())
-            {
-                window.PollEvents();
-                Input.ProcessInputs();
-                window.Clear();
-                deltaTime = window.DeltaTime();
-                LuaObject.Update();
-                window.Present();
 
+            while(BBQLib.BBQLib.IsOpen)
+            {
+                BBQLib.BBQLib.Clear();
+                LuaObject.Update();
+                BBQLib.BBQLib.Display();
                 GC.Collect();
             }
         }

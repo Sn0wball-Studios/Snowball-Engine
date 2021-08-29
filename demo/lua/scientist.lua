@@ -22,9 +22,8 @@ end
 
 
 function scientist.update(self)
-    self.timer = self.timer + dt() * self.speed
-
-    self.rotation = self.rotation + dt() * self.speed * 180
+    self.timer = self.timer + dt * self.speed
+    self.rotation = self.rotation + dt * self.speed * 180
     --DrawBox(self.sprite.bounds, self.color)
 end
 

@@ -24,3 +24,8 @@ a different library, you only need to write implementations for a few classes.
 you can reference these from Snowball.dll,
 then compile them to a dll, then place it in the "backends/" directory, and edit the engine.json file to include the names of your new classes
 
+
+
+## dependencies
+- [BBQLib](https://github.com/BBQGiraffe/BBQLib)
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)
