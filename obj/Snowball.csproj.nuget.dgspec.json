@@ -38,10 +38,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "ImGui.NET": {
-              "target": "Package",
-              "version": "[1.78.0, )"
-            },
             "MoonSharp": {
               "target": "Package",
               "version": "[2.0.0, )"
@@ -53,10 +49,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
-            },
-            "OpenTK": {
-              "target": "Package",
-              "version": "[4.6.4, )"
             },
             "SFML.NET": {
               "target": "Package",

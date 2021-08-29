@@ -2,6 +2,7 @@ using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Loaders;
 using System.Collections.Generic;
 using System.Numerics;
+using BBQLib;
 using System;
 namespace Snowball
 {
@@ -49,7 +50,7 @@ namespace Snowball
         {
 
                 var simBounds = new BoundingBox(new Vector2(Engine.simulationRange, Engine.simulationRange));
-                simBounds.min = Engine.window.camera - Engine.window.size / 2;
+                simBounds.min = BBQLib.BBQLib.Camera - BBQLib.BBQLib.Camera / 2;
                 var spriteA = objA["sprite"] as Sprite;
                 if(spriteA != null)
                 {
@@ -72,8 +73,8 @@ namespace Snowball
                             bool collision = BoundingBox.AABB(spriteA.bounds, spriteB.bounds);
                             if(collision)
                             {
-                                Engine.window.DrawBox(spriteA.bounds, Color.Red);
-                                Engine.window.DrawBox(spriteB.bounds, Color.Red);
+                                //Engine.window.DrawBox(spriteA.bounds, Color.Red);
+                                //Engine.window.DrawBox(spriteB.bounds, Color.Red);
                             }
                         }
                     }
@@ -83,11 +84,12 @@ namespace Snowball
        
         public static void Update()
         {
+            script.Globals["dt"] = BBQLib.BBQLib.DeltaTime;
             ((Closure)script.Globals["update"]).Call();
             
             foreach(var obj in objects)
             {              
-                var distance = Vector2.Distance((Vector2)obj["position"], Engine.window.camera);
+                var distance = Vector2.Distance((Vector2)obj["position"], BBQLib.BBQLib.Camera);
 
                 if(distance > Engine.simulationRange)
                 {
@@ -102,7 +104,7 @@ namespace Snowball
                 {
                     sprite.position = GetProperty<Vector2>("position", obj);
                     sprite.rotation = (float)GetProperty<double>("rotation", obj);
-                    Engine.window.DrawSprite(sprite as Sprite);
+                    BBQLib.BBQLib.Draw(sprite as Sprite);
                     HandleCollisions(obj);
                 }
                 

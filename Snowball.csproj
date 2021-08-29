@@ -7,12 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ImGui.NET" Version="1.78.0" />
     <PackageReference Include="MoonSharp" Version="2.0.0" />
     <PackageReference Include="MoonSharp.Debugger.VsCode" Version="2.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="OpenTK" Version="4.6.4" />
     <PackageReference Include="SFML.NET" Version="2.5.0" />
+    <Reference Include="BBQLib">
+      <HintPath>../BBQLib/bin/Debug/net5.0/BBQLib.dll</HintPath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Reference>
+    <Reference Include="SDL2-CS.NetCore">
+      <HintPath>SDL2-CS.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
