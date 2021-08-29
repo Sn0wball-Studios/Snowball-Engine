@@ -6,7 +6,7 @@ light weight modular game engine
 - can be easily ported to your game library of choice(SDL2, OpenTK, etc).
 <br></br>
 ## creating a game
-to create a game simply run "./Snowball create game GameName" this will create a new skeleton game in the GameName directory
+to create a game simply run "./Snowball create game GameName" this will create a new skeleton game in the GameName directory (or just copy paste the demo game because the create game function doesn't create a lot of vital files
 
 for examples on the acual coding of games,
 see the demo game in the "demo" directory.<br></br>
