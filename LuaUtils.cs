@@ -64,6 +64,9 @@ namespace Snowball
             script.Globals["DrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawText;
             script.Globals["UIDrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawText;
 
+            script.Globals["ReadBinaryFile"] = (Func<string, byte[]>)File.ReadAllBytes;
+            script.Globals["CreateSpriteFromBuffer"]= (Func<byte[], uint, uint, string, Sprite>)BBQLib.BBQLib.CreateSprite;
+
             script.Globals["Vec2"] = (Func<float, float, Vector2>)Vec2Utils.CreateVec2;
             script.Globals["SetCameraPosition"] = (Action<Vector2>)SetCamera;
             script.Globals["Vec2GetAngle"] = (Func<Vector2, Vector2, float>)Vec2Utils.GetAngle;
