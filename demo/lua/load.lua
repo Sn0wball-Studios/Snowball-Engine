@@ -8,8 +8,9 @@ sprite = CreateSpriteFromBuffer(bytes, 128, 128, "doom")
 
 function start()
 
-	for i  = 0,50 do 
-		CreateObject(scientist:create(Vec2(32 + i * 32, i * 16)))
+	for i  = 0,10 do 
+		ent = CreateObject(scientist:create(Vec2(32 + i * 32, i * 16)))
+		ent.speed = (math.sin(i)) * i
 	end
 
 	player = CreateObject(player:create(Vec2(0, 0)))

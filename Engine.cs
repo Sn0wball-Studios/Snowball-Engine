@@ -26,24 +26,6 @@ namespace Snowball
             }
         }
 
-        static void LoadGameConfig(string directory)
-        {
-            var config = File.ReadAllLines(directory + "game.conf");
-            var width = uint.Parse(config[0]);
-            var height = uint.Parse(config[1]);
-            var fps = uint.Parse(config[2]);
-            var title = config[3];
-
-            WindowConfig winConfig = new WindowConfig()
-            {
-                width = width,
-                height = height,
-                fps = fps,
-                name = title
-            };
-
-            BBQLib.BBQLib.Init(winConfig, BackendType.SDL);
-        }
 
 
         public static void CreateGameDirectory(string name)
@@ -83,7 +65,9 @@ namespace Snowball
             gameDirectory = ((args.Length > 0) ? args[0] : defaultDirectory) + "/";
 
             
-            LoadGameConfig(gameDirectory);
+            WindowConfig windowConfig = Json.Load<WindowConfig>(gameDirectory + "game.json");
+            BBQLib.BBQLib.Init(windowConfig, BackendType.SFML);
+            
             Input.LoadAxisFile(DirectoryConsts.inputDirectory + "axes.json");
             BBQLib.BBQLib.rootDirectory = gameDirectory;
             BBQLib.BBQLib.LoadFonts("fonts.json");
