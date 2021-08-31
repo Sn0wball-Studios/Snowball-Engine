@@ -16,12 +16,18 @@ namespace Snowball
             UserData.RegisterType<OriginType>();
             UserData.RegisterType<Sprite>();
             UserData.RegisterType<Color>();
+            UserData.RegisterType<LuaBinaryReader>();
         }
 
         
         static float LUA_GetDeltaTime()
         {
             return Engine.deltaTime;
+        }
+
+        static LuaBinaryReader LUA_CreateBinaryReader(string filename)
+        {
+            return new LuaBinaryReader(LUA_ReadBinary(filename));
         }
         
 
@@ -48,10 +54,32 @@ namespace Snowball
         static void LUA_DrawText(string text, string font, Vector2 position, OriginType type)
         {
             BBQLib.BBQLib.Draw(font, text, position);
-           // BBQLib.BBQLib.Draw()
         }
+
+        static void LUA_DrawStaticText(string text, string font, Vector2 position, OriginType type)
+        {
+            BBQLib.BBQLib.Draw(font, text, position - BBQLib.BBQLib.Camera);
+        }
+
+        static byte[] LUA_ReadBinary(string filename)
+        {
+            return File.ReadAllBytes(Engine.gameDirectory + filename);
+        }
+
+        static void LUA_SaveBinary(string filename, byte[] data)
+        {
+            File.WriteAllBytes(Engine.gameDirectory + filename, data);
+        }
+
+        static byte[] Allocate(int length)
+        {
+            return new byte[length];
+        }
+
         public static void LoadGlobalFunctions(Script script, LuaObject obj)
         {
+            script.Globals["Allocate"] = (Func<int, byte[]>)Allocate;
+
             script.Globals["CreateObject"] = (Func<Table, Table>)LuaObject.AddObject;
             script.Globals["DrawSprite"] = (Action<Sprite>)BBQLib.BBQLib.Draw;
             script.Globals["LoadSprite"] = (Func<string, Sprite>)LUA_LoadSprite;
@@ -62,11 +90,13 @@ namespace Snowball
             script.Globals["Random"] = (Func<float>)Rng.RandomFloat;
             script.Globals["RandomRange"] = (Func<int, int, int>)Rng.Range;
             script.Globals["DrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawText;
-            script.Globals["UIDrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawText;
+            script.Globals["UIDrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawStaticText;
 
-            script.Globals["ReadBinaryFile"] = (Func<string, byte[]>)File.ReadAllBytes;
+            script.Globals["ReadBinaryFile"] = (Func<string, byte[]>)LUA_ReadBinary;
+            script.Globals["SaveBinaryFile"] = (Action<string, byte[]>)LUA_SaveBinary;
+            script.Globals["BinaryReader"] = (Func<string, LuaBinaryReader>)LUA_CreateBinaryReader;
             script.Globals["CreateSpriteFromBuffer"]= (Func<byte[], uint, uint, string, Sprite>)BBQLib.BBQLib.CreateSprite;
-
+            script.Globals["CreatePalettedSprite"] = (Func<byte[], byte[], uint, uint, string, Sprite>)BBQLib.BBQLib.CreateSprite;
             script.Globals["Vec2"] = (Func<float, float, Vector2>)Vec2Utils.CreateVec2;
             script.Globals["SetCameraPosition"] = (Action<Vector2>)SetCamera;
             script.Globals["Vec2GetAngle"] = (Func<Vector2, Vector2, float>)Vec2Utils.GetAngle;
