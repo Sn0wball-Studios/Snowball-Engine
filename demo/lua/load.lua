@@ -4,9 +4,12 @@ player = require("player")
 
 function start()
 
-	for i  = 0,10 do 
-		ent = CreateObject(scientist:create(Vec2(32 + i * 32, i * 16)))
-		ent.speed = (math.sin(i)) * i
+
+	for x = 0, 10 do
+		for y = 0, 10 do
+			ent = CreateObject(scientist:create(Vec2(x * 32 , y * 32)))
+			ent.speed = (math.sin(x)) * 5
+		end
 	end
 
 	player = CreateObject(player:create(Vec2(0, 0)))

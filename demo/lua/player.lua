@@ -9,7 +9,7 @@ function player:create(position_)
         name = "player",
         sprite = LoadSprite("guy.json"),
         update = player.update,
-        speed = 32 * 1.4
+        speed = 32 * 1.4 --walking speed is 1.4 meters per second
     }
     
 	self.__index = self
