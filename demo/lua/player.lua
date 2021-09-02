@@ -7,9 +7,10 @@ function player:create(position_)
         rotation = 0, 
         id = 0, 
         name = "player",
-        sprite = LoadSprite("guy.json"),
+        sprite = LoadSprite("jario.json"),
         update = player.update,
-        speed = 32 * 1.4 --walking speed is 1.4 meters per second
+        physics = PhysicsHandler(position_, Vec2(16 * 2.8, 16 * 2.8)),
+        gravity = 9.8 * 16,
     }
     
 	self.__index = self
@@ -18,11 +19,16 @@ function player:create(position_)
 
 end
 
-
 function player.update(self)
-    self.position.X = self.position.X + InputGetAxis("horizontal") * self.speed * dt
-	self.position.Y = self.position.Y + -InputGetAxis("vertical") * self.speed * dt
+    --self.velocity = Vec2(0,0)
+    self.physics.acceleration = Vec2(InputGetAxis("horizontal") * 100, 0)
+    self.physics.DoPhysics()
+    self.position = self.physics.position
+    
+    --self.position = self.position + self.velocity * dt
+
 	SetCameraPosition(self.position)
+
 end
 
 return player

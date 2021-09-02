@@ -1,13 +1,21 @@
 # some information on the Lua api
 
-## input functions
+## Input functions
 
 - InputIsKeyDown(Keyboardkey Key) returns true if a key is down
 - InputGetAxis(string axis) returns a -1 to 1 float for a axis
 
+## Memory 
+- Allocate(int size) returns a new byte array
+
+## File IO
+- ReadBinaryFile(string file) returns the contents of a file as a byte array
+- SaveBinaryFile(string file, byte[] data) saves binary data to a file
+- BinaryReader(string file) returns a new binary reader
 
 ## Vector2
 the Vector2 class is a simple 2D vector with X and Y values
+
 ### Vector2 functions
 - Vec2(float x, float y) returns a new Vector2
 - Vec2GetAngle(Vector2 me, Vector2 target) returns the angle between two points

@@ -17,6 +17,7 @@ namespace Snowball
             UserData.RegisterType<Sprite>();
             UserData.RegisterType<Color>();
             UserData.RegisterType<LuaBinaryReader>();
+            UserData.RegisterType<PhysicsHandler>();
         }
 
         
@@ -53,12 +54,12 @@ namespace Snowball
         
         static void LUA_DrawText(string text, string font, Vector2 position, OriginType type)
         {
-            BBQLib.BBQLib.Draw(font, text, position);
+            BBQLib.BBQLib.Draw(font, text, position- BBQLib.BBQLib.Camera);
         }
 
         static void LUA_DrawStaticText(string text, string font, Vector2 position, OriginType type)
         {
-            BBQLib.BBQLib.Draw(font, text, position - BBQLib.BBQLib.Camera);
+            BBQLib.BBQLib.Draw(font, text, position);
         }
 
         static byte[] LUA_ReadBinary(string filename)
@@ -79,7 +80,7 @@ namespace Snowball
         public static void LoadGlobalFunctions(Script script, LuaObject obj)
         {
             script.Globals["Allocate"] = (Func<int, byte[]>)Allocate;
-
+            script.Globals["PhysicsHandler"] = (Func<Vector2, Vector2, PhysicsHandler>)PhysicsHandler.Create;
             script.Globals["CreateObject"] = (Func<Table, Table>)LuaObject.AddObject;
             script.Globals["DrawSprite"] = (Action<Sprite>)BBQLib.BBQLib.Draw;
             script.Globals["LoadSprite"] = (Func<string, Sprite>)LUA_LoadSprite;
@@ -91,7 +92,7 @@ namespace Snowball
             script.Globals["RandomRange"] = (Func<int, int, int>)Rng.Range;
             script.Globals["DrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawText;
             script.Globals["UIDrawText"] = (Action<string, string, Vector2, OriginType>)LUA_DrawStaticText;
-
+            script.Globals["PlaySound"] = (Action<string>)BBQLib.BBQLib.PlaySound;
             script.Globals["ReadBinaryFile"] = (Func<string, byte[]>)LUA_ReadBinary;
             script.Globals["SaveBinaryFile"] = (Action<string, byte[]>)LUA_SaveBinary;
             script.Globals["BinaryReader"] = (Func<string, LuaBinaryReader>)LUA_CreateBinaryReader;
@@ -110,7 +111,7 @@ namespace Snowball
             script.Globals["BoundingBox"] = (Func<Vector2, BoundingBox>)BoundingBox.Create;
             //enums
             script.Globals["OriginType"] = UserData.CreateStatic<OriginType>();
-
+            script.Globals["KeyboardKey"] = UserData.CreateStatic<KeyboardKey>();
             //debug stuff
             script.Globals["DebugGetMemoryUsage"] = (Func<long>)Debug.GetMemoryUsage;
         }

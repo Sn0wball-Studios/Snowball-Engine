@@ -56,6 +56,8 @@ namespace Snowball
             LuaUtils.CreateLuaFile("load.lua");
         }
 
+
+        
         public static void Run(string[] args)
         {
             Console.WriteLine("{0} created by BBQGiraffe running on {1}", engineName, Environment.OSVersion);
@@ -73,7 +75,7 @@ namespace Snowball
             BBQLib.BBQLib.LoadFonts("fonts.json");
 
             Console.WriteLine("starting lua{0}...", Script.LUA_VERSION);
-            
+            BBQLib.BBQLib.LoadSounds("sfx");
             LuaUtils.LoadEngineClasses();
             LuaObject.LoadLua();
 
