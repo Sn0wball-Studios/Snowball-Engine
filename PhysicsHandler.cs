@@ -9,6 +9,8 @@ namespace BBQLib
         public float drag = 25;
         public Vector2 acceleration = new Vector2();
 
+        public BoundingBox box;
+
         public static PhysicsHandler Create(Vector2 position, Vector2 maxSpeed)
         {
             PhysicsHandler handler = new PhysicsHandler()
@@ -17,6 +19,11 @@ namespace BBQLib
                 maxSpeed = maxSpeed
             };
             return handler;
+        }
+
+        public void SetBox(BoundingBox box)
+        {
+            this.box = box;
         }
 
         public void DoPhysics()
@@ -48,6 +55,15 @@ namespace BBQLib
             if(velocity.X < 0)
             {
                 velocity.X += drag * BBQLib.DeltaTime;
+            }
+
+            if(velocity.Y > 0)
+            {
+                velocity.Y -= drag * BBQLib.DeltaTime;
+            }
+            if(velocity.Y < 0)
+            {
+                velocity.Y += drag * BBQLib.DeltaTime;
             }
 
 

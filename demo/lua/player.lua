@@ -1,5 +1,10 @@
 local player = {}
 
+function player.initPhysics(self)
+    self.physics = PhysicsHandler(self.position, Vec2(16 * 2.8, 16 * 2.8))
+    self.physics.drag = 50
+end
+
 function player:create(position_)
 
     o = {
@@ -7,25 +12,21 @@ function player:create(position_)
         rotation = 0, 
         id = 0, 
         name = "player",
-        sprite = LoadSprite("jario.json"),
+        sprite = LoadSprite("guy.json"),
         update = player.update,
-        physics = PhysicsHandler(position_, Vec2(16 * 2.8, 16 * 2.8)),
-        gravity = 9.8 * 16,
+        speed = 100
     }
     
 	self.__index = self
 	setmetatable(o, self)
+    self.initPhysics(o)
     return o
 end
 
 function player.update(self)
-    --self.velocity = Vec2(0,0)
-    self.physics.acceleration = Vec2(InputGetAxis("horizontal") * 100, 0)
+    self.physics.acceleration = Vec2(InputGetAxis("horizontal"), -InputGetAxis("vertical")) * self.speed
     self.physics.DoPhysics()
     self.position = self.physics.position
-    
-    --self.position = self.position + self.velocity * dt
-
 	SetCameraPosition(self.position)
 
 end
