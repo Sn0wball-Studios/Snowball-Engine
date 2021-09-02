@@ -20,12 +20,6 @@ namespace Snowball
             UserData.RegisterType<PhysicsHandler>();
         }
 
-        
-        static float LUA_GetDeltaTime()
-        {
-            return Engine.deltaTime;
-        }
-
         static LuaBinaryReader LUA_CreateBinaryReader(string filename)
         {
             return new LuaBinaryReader(LUA_ReadBinary(filename));
@@ -85,7 +79,6 @@ namespace Snowball
             script.Globals["DrawSprite"] = (Action<Sprite>)BBQLib.BBQLib.Draw;
             script.Globals["LoadSprite"] = (Func<string, Sprite>)LUA_LoadSprite;
             //script.Globals["LoadIsometricSprite"] = (Func<string, Sprite>)Sprite.LoadIsometric;
-            //script.Globals["CreateSoundSource"] = (Func<string, SoundSource>)Engine.soundFactory.CreateSource;
             script.Globals["InputIsKeyDown"] = (Func<KeyboardKey, bool>)Input.IsKeyDown;
             script.Globals["InputGetAxis"] = (Func<string, float>)Input.GetAxis;
             script.Globals["Random"] = (Func<float>)Rng.RandomFloat;

@@ -16,18 +16,6 @@ namespace Snowball
 
         public const string engineScripts = "engineScripts/";
 
-        public static float simulationRange = 1600;
-
-        private static string defaultBackend
-        {
-            get
-            {
-                return "Default Backend";
-            }
-        }
-
-
-
         public static void CreateGameDirectory(string name)
         {
             Engine.gameDirectory = name;
