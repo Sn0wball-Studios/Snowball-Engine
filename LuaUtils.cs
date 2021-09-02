@@ -74,7 +74,7 @@ namespace Snowball
         public static void LoadGlobalFunctions(Script script, LuaObject obj)
         {
             script.Globals["Allocate"] = (Func<int, byte[]>)Allocate;
-            script.Globals["PhysicsHandler"] = (Func<Vector2, Vector2, PhysicsHandler>)PhysicsHandler.Create;
+            script.Globals["PhysicsHandler"] = (Func<Vector2, float, PhysicsHandler>)PhysicsHandler.Create;
             script.Globals["CreateObject"] = (Func<Table, Table>)LuaObject.AddObject;
             script.Globals["DrawSprite"] = (Action<Sprite>)BBQLib.BBQLib.Draw;
             script.Globals["LoadSprite"] = (Func<string, Sprite>)LUA_LoadSprite;
@@ -96,7 +96,8 @@ namespace Snowball
             script.Globals["Vec2GetAngle"] = (Func<Vector2, Vector2, float>)Vec2Utils.GetAngle;
             script.Globals["Vec2GetDirection"] = (Func<Vector2, Vector2, Vector2>)Vec2Utils.GetDirection;
             script.Globals["Vec2GetLength"] = (Func<Vector2, float>)Vec2Utils.Length;
-            script.Globals["Vec2Distance"] = (Func<Vector2, Vector2, float>)Vec2Utils.Distance;
+            script.Globals["Vec2Distance"] = (Func<Vector2, Vector2, float>)Vector2.Distance;
+            script.Globals["Vec2Normalize"] = (Func<Vector2, Vector2>)Vector2.Normalize;
             script.Globals["Color"] = (Func<float,float,float,float,Color>)Color.CreateColor;
             script.Globals["ColorMix"] = (Func<Color,Color,float,Color>)Color.Mix;
             script.Globals["Color255"] = (Func<byte,byte,byte,byte,Color>)Color.From255RGB;
