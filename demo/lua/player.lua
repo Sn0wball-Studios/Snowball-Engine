@@ -16,7 +16,6 @@ function player:create(position_)
 	self.__index = self
 	setmetatable(o, self)
     return o
-
 end
 
 function player.update(self)

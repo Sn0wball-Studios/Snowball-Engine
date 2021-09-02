@@ -11,17 +11,18 @@ namespace BBQLib
 
         public static PhysicsHandler Create(Vector2 position, Vector2 maxSpeed)
         {
-            PhysicsHandler p = new PhysicsHandler()
+            PhysicsHandler handler = new PhysicsHandler()
             {
                 position = position,
                 maxSpeed = maxSpeed
             };
-            return p;
+            return handler;
         }
 
         public void DoPhysics()
         {
             velocity += acceleration * BBQLib.DeltaTime;
+            //todo make this not ugly
             if(velocity.X > maxSpeed.X)
             {
                 velocity.X = maxSpeed.X;
