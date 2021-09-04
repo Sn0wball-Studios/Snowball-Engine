@@ -45,42 +45,6 @@ namespace Snowball
             return (T)dyn[name];
         }
 
-
-        static void HandleCollisions(Table objA)
-        {
-
-                var simBounds = new BoundingBox(new Vector2(Engine.simulationRange, Engine.simulationRange));
-                simBounds.min = BBQLib.BBQLib.Camera - BBQLib.BBQLib.Camera / 2;
-                var spriteA = objA["sprite"] as Sprite;
-                if(spriteA != null)
-                {
-                    
-
-                    if(!BoundingBox.AABB(spriteA.bounds, simBounds))
-                    {
-                        return;
-                    }
-
-                    foreach(var objB in objects)
-                    {
-                        if((int)((double)objB["id"]) == (int)((double)objA["id"]))
-                        {
-                            continue;
-                        }
-                        var spriteB = objB["sprite"] as Sprite;
-                        if(spriteB != null)
-                        {
-                            bool collision = BoundingBox.AABB(spriteA.bounds, spriteB.bounds);
-                            if(collision)
-                            {
-                                //Engine.window.DrawBox(spriteA.bounds, Color.Red);
-                                //Engine.window.DrawBox(spriteB.bounds, Color.Red);
-                            }
-                        }
-                    }
-                }
-        }
-
        
         public static void Update()
         {
@@ -89,13 +53,6 @@ namespace Snowball
             
             foreach(var obj in objects)
             {              
-                var distance = Vector2.Distance((Vector2)obj["position"], BBQLib.BBQLib.Camera);
-
-                if(distance > Engine.simulationRange)
-                {
-                    continue;
-                }
-
                 ((Closure)obj["update"]).Call(obj);
                 
                 var sprite = obj["sprite"] as Sprite;
@@ -105,7 +62,6 @@ namespace Snowball
                     sprite.position = GetProperty<Vector2>("position", obj);
                     sprite.rotation = (float)GetProperty<double>("rotation", obj);
                     BBQLib.BBQLib.Draw(sprite as Sprite);
-                    HandleCollisions(obj);
                 }
                 
             }

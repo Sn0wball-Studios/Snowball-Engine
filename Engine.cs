@@ -16,36 +16,6 @@ namespace Snowball
 
         public const string engineScripts = "engineScripts/";
 
-        public static float simulationRange = 1600;
-
-        private static string defaultBackend
-        {
-            get
-            {
-                return "Default Backend";
-            }
-        }
-
-        static void LoadGameConfig(string directory)
-        {
-            var config = File.ReadAllLines(directory + "game.conf");
-            var width = uint.Parse(config[0]);
-            var height = uint.Parse(config[1]);
-            var fps = uint.Parse(config[2]);
-            var title = config[3];
-
-            WindowConfig winConfig = new WindowConfig()
-            {
-                width = width,
-                height = height,
-                fps = fps,
-                name = title
-            };
-
-            BBQLib.BBQLib.Init(winConfig, BackendType.SDL);
-        }
-
-
         public static void CreateGameDirectory(string name)
         {
             Engine.gameDirectory = name;
@@ -74,6 +44,8 @@ namespace Snowball
             LuaUtils.CreateLuaFile("load.lua");
         }
 
+
+        
         public static void Run(string[] args)
         {
             Console.WriteLine("{0} created by BBQGiraffe running on {1}", engineName, Environment.OSVersion);
@@ -83,13 +55,15 @@ namespace Snowball
             gameDirectory = ((args.Length > 0) ? args[0] : defaultDirectory) + "/";
 
             
-            LoadGameConfig(gameDirectory);
+            WindowConfig windowConfig = Json.Load<WindowConfig>(gameDirectory + "game.json");
+            BBQLib.BBQLib.Init(windowConfig, BackendType.SFML);
+            
             Input.LoadAxisFile(DirectoryConsts.inputDirectory + "axes.json");
             BBQLib.BBQLib.rootDirectory = gameDirectory;
             BBQLib.BBQLib.LoadFonts("fonts.json");
 
             Console.WriteLine("starting lua{0}...", Script.LUA_VERSION);
-            
+            BBQLib.BBQLib.LoadSounds("sfx");
             LuaUtils.LoadEngineClasses();
             LuaObject.LoadLua();
 

@@ -30,12 +30,7 @@ public static class Vec2Utils
 
         return new Vector2(MathF.Cos(angle * Rad2Deg), MathF.Sin(angle * Rad2Deg));
     }
-
-    public static float Distance(Vector2 me, Vector2 target)
-    {
-        return Vector2.Distance(me, target);
-    }
-
+    
     //have to do this cuz lua
     public static float Length(Vector2 vec)
     {

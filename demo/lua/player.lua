@@ -1,11 +1,15 @@
 local player = {}
 
+function player.initPhysics(self)
+    self.physics = PhysicsHandler(self.position, self.speed)
+    self.physics.drag = 64
+end
+
 function player:create(position_)
 
     o = {
         position = position_, 
         rotation = 0, 
-        id = 0, 
         name = "player",
         sprite = LoadSprite("guy.json"),
         update = player.update,
@@ -14,15 +18,24 @@ function player:create(position_)
     
 	self.__index = self
 	setmetatable(o, self)
+    self.initPhysics(o)
     return o
-
 end
 
-
 function player.update(self)
-    self.position.X = self.position.X + InputGetAxis("horizontal") * self.speed * dt
-	self.position.Y = self.position.Y + -InputGetAxis("vertical") * self.speed * dt
+    input = Vec2(InputGetAxis("horizontal"), -InputGetAxis("vertical"))
+
+    if(Vec2GetLength(input) > 0) then
+        self.physics.acceleration = Vec2Normalize(input) * self.speed
+    else
+        self.physics.acceleration = Vec2(0,0)
+    end
+
+    self.physics.DoPhysics()
+    self.position = self.physics.position
 	SetCameraPosition(self.position)
+
+    UIDrawText("velocity ".. (self.physics.velocity/32).ToString().. " m/s", "demoFont", Vec2(0,40), OriginType.topLeft)
 end
 
 return player
