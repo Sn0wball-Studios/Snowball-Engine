@@ -56,7 +56,7 @@ namespace Snowball
 
             
             WindowConfig windowConfig = Json.Load<WindowConfig>(gameDirectory + "game.json");
-            BBQLib.BBQLib.Init(windowConfig, BackendType.SFML);
+            BBQLib.BBQLib.Init(windowConfig);
             
             Input.LoadAxisFile(DirectoryConsts.inputDirectory + "axes.json");
             BBQLib.BBQLib.rootDirectory = gameDirectory;
