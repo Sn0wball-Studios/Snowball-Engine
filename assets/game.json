@@ -1,0 +1,7 @@
+{
+	"windowWidth": 320,
+	"windowHeight": 200,
+	"gameName": "five night feddy",
+	"startScript": "assets/scripts/main_menu.nut",
+	"stackSize" : 512
+}
