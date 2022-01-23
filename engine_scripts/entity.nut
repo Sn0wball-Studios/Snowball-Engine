@@ -9,6 +9,6 @@ class Entity
 
     constructor(_position, rotation, _name)
     {
-
+        local str = format("created entity %s", _name);
     }
 }

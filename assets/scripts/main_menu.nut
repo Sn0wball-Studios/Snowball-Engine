@@ -1,4 +1,4 @@
-local font = ui_load_font("assets/Kenney Pixel.ttf", 16);
+local font = ui_load_font("assets/Kenney Pixel.ttf", 12);
 local logoFont = ui_load_font("assets/Kenney Future.ttf", 12);
 
 local text_color = color(255, 255, 255);
@@ -31,13 +31,22 @@ local eyeY = 34.0
 
 
 
-import("snowball/entity")
+import("snowball/snowball")
+import("player")
 
-local vec = Vec2(100, 69)
+sprint(Player)
 
 function update()
 {	
+	local memSize = 0.0 + debug_get_memory_usage();
+	
+	memSize = (memSize/1000.0) / 1000.0;
+
+
 	window_draw_sprite(springtrap, 0, 0, 0);
+	ui_text(font, format("AssetMem: %dMB", memSize.tointeger()), 0, 0, text_color)
+	
+
 	playTimer += deltatime();
 	if(playTimer < timeToPlay)
 	{
@@ -76,6 +85,8 @@ function update()
 			scene_load("assets/scripts/game.nut");	
 		}
 	}
+
+	
 }
 
 function fadeOut()

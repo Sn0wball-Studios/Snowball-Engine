@@ -11,6 +11,16 @@
 #include "linkedlist.h"
 #include "sound.h"
 #include "scripthandler.h"
+#include "asset.h"
+SQInteger sqBinding_get_asset_memory(HSQUIRRELVM v)
+{
+    SQInteger size = asset_getMemorySize();
+
+    sq_pushinteger(v, size);
+
+
+    return size;
+}
 
 SQInteger sqBinding_scene_load(HSQUIRRELVM v)
 {
@@ -50,7 +60,7 @@ void updateTimer(listitem_t* item)
 {
     functionInvokeTimer_t* timer = item->data;
     timer->timer += deltaTime;
-
+    
     if(timer->timer > timer->time)
     {
         script_invoke(root_script, timer->functionName);

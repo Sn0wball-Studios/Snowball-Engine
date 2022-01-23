@@ -9,6 +9,8 @@ void squirrel_updateFunctionTimers();
 SQInteger sqBinding_invoke_inSeconds(HSQUIRRELVM v);
 SQInteger sqBinding_import(HSQUIRRELVM v);
 
+SQInteger sqBinding_get_asset_memory(HSQUIRRELVM v);
+
 
 SQInteger print_args(HSQUIRRELVM v);
 

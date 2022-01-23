@@ -121,6 +121,10 @@ void asset_PNG(asset_t* asset)
 
     SDL_Surface* surface = IMG_LoadPNG_RW(data);
 
+    int sizeOfTexture = surface->pitch * surface->h;
+
+    memSize += sizeOfTexture;
+
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     
     SDL_FreeSurface(surface);
@@ -149,6 +153,7 @@ void asset_Sound(asset_t* asset)
     
     Mix_Chunk* chunk = Mix_LoadWAV_RW(data, 1);
 
+    free(asset->data);
     asset->data = chunk;
     
     memSize += chunk->alen;
@@ -163,7 +168,7 @@ void asset_Sound(asset_t* asset)
 
 size_t asset_getMemorySize()
 {
-
+    return memSize;
 }
 
 void asset_TTF(asset_t* asset)

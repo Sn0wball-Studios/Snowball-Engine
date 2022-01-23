@@ -58,6 +58,7 @@ void script_invoke(script_t* script, const char* funcName)
 	{
 		SDL_Log("failed to invoke function %s\n", funcName);
 	}
+
 	sq_pop(script->vm,1); //pops the roottable and the function
 
 }
@@ -133,6 +134,9 @@ void push_funcs(script_t* script)
 	register_global_func(script, sqBinding_deltaTime, "deltatime");
 	register_global_func(script, sqBinding_invoke_inSeconds, "invokeInSeconds");
 
+	
+	register_global_func(script, sqBinding_get_asset_memory, "debug_get_memory_usage");
+
 	register_global_func(script, sqBinding_window_set_title, "window_set_title");
 	register_global_func(script, sqBinding_window_set_size, "window_set_size");
 	register_global_func(script, sqBinding_window_set_draw_color, "window_set_draw_color");
@@ -169,12 +173,9 @@ void script_compile(script_t* script, const char* filename)
 	push_funcs(script);
 
 	FILE *f = fopen(filename,"rb");
-	if(!SQ_FAILED(sq_compile(script->vm,file_lexfeedASCII,f,filename,1)))
+	if(SQ_FAILED(sq_compile(script->vm,file_lexfeedASCII,f,filename,1)))
 	{
-		SDL_Log("compiled script %s\n", filename);
-	}else
-	{
-		SDL_Log("failed to compile!!\n");
+		SDL_Log("[Error]failed to compile script %s\n", filename);
 	}
 	fclose(f);
 }

@@ -44,9 +44,8 @@ void ui_text(TTF_Font* font, const char* text, float x, float y, SDL_Color text_
 		.w = w,
 		.h = h
 	};
-
-
 	SDL_RenderCopyF(renderer, texture, NULL, &dest);
+	SDL_DestroyTexture(texture);
 }
 #include "linkedlist.h"
 size_t asset_size;
