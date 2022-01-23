@@ -25,10 +25,10 @@ local defaultJumpScareSound = null
 
 local animatronics =
 [
-    animatronic.Animatronic(6, defaultJumpScareSound, "Freddy"), //feddy
-     animatronic.Animatronic(3, defaultJumpScareSound, "Bonnie"),
-     animatronic.Animatronic(4, defaultJumpScareSound, "Chica"),
-     animatronic.Animatronic(2, defaultJumpScareSound, "Foxie")
+    Animatronic(6, defaultJumpScareSound, "Freddy"), //feddy
+    Animatronic(3, defaultJumpScareSound, "Bonnie"),
+    Animatronic(4, defaultJumpScareSound, "Chica"),
+    Animatronic(2, defaultJumpScareSound, "Foxie")
 ];
 
 function updateAnimatronics()

@@ -34,7 +34,7 @@ local eyeY = 34.0
 import("snowball/snowball")
 import("player")
 
-sprint(Player)
+// sprint(Player)
 
 function update()
 {	

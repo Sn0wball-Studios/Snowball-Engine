@@ -1,9 +1,7 @@
-class Player
+class Player extends Entity
 {
     constructor(_position, rotation)
     {
         // base.constructor(_position, rotation, "Player")
     }
 }
-
-sprint(Player)

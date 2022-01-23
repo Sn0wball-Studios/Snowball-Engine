@@ -1,6 +1,3 @@
-
-//TODO: make sure the same module is not imported twice
-
 local imported = [];
 
 function import(module) 
@@ -30,7 +27,10 @@ function import(module)
     sprint(str)
 
     modenv.dofile(modulePath);
-	rootenv.rawset(module, modenv);
+
+    foreach (key, value in modenv) {
+        rootenv.rawset(key, value);
+    }
 
 	setroottable(rootenv)
 }
