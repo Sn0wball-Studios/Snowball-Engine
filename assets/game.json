@@ -1,7 +1,7 @@
 {
 	"windowWidth": 320,
 	"windowHeight": 200,
-	"gameName": "five night feddy",
-	"startScript": "assets/scripts/main_menu.nut",
+	"gameName": "ligma balls",
+	"startScript": "assets/scripts/game.nut",
 	"stackSize" : 512
 }

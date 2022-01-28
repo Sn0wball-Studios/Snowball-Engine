@@ -75,6 +75,14 @@ void* myLogFn(void* userdata, int category, SDL_LogPriority priority, const char
 
 SDL_Texture* window_getSprite(const char* name)
 {
+    //todo: get json file
+    int len = strlen(name);
+    char* jsonName = malloc(len + 8);
+
+    sprintf(jsonName, "%s.json", name);
+
+    SDL_Log("loaded sprite json %s\n", jsonName);
+    free(jsonName);
     return asset_getasset(name)->data;
 }
 

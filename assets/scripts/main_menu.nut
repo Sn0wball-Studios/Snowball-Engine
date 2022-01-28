@@ -34,10 +34,11 @@ local eyeY = 34.0
 import("snowball/snowball")
 import("player")
 
-// sprint(Player)
+local p = Player(Vec2(0,0), 45)
 
 function update()
 {	
+	sprint("" + p.position)
 	local memSize = 0.0 + debug_get_memory_usage();
 	
 	memSize = (memSize/1000.0) / 1000.0;

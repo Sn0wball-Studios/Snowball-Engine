@@ -1,7 +1,14 @@
 class Player extends Entity
 {
-    constructor(_position, rotation)
+    constructor()
     {
-        // base.constructor(_position, rotation, "Player")
+        // base.constructor(Vec2(45, 5), 45, "Player")
+        name = "Player"
+    }
+
+
+    function update()
+    {
+        
     }
 }

@@ -24,7 +24,7 @@ function import(module)
     }
 
     local str = format("loaded module %s", modulePath)
-    sprint(str)
+    // sprint(str)
 
     modenv.dofile(modulePath);
 

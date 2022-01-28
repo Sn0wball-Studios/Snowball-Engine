@@ -1,14 +1,36 @@
 import("snowball/vec2")
 class Entity
 {
-    static entities = [];
-
     position = null;
     rotation = 0.0;
     name = "Entity";
+    sprite = null;
 
-    constructor(_position, rotation, _name)
+    constructor()
     {
-        local str = format("created entity %s", _name);
+       
     }
+
+    static entities = [];
+    static function UpdateEntities()
+    {
+        foreach(i, entity in entities)
+        {
+            entity.update();
+        }
+    }
+
+    static function Create(classType, position, angle)
+    {
+        local entity = classType();
+        entity.position = position;
+        entity.rotation = angle;
+        entities.append(entity);
+    }
+}
+
+//squirrel doesn't seem to have static functions?
+function entityManager_update()
+{
+
 }
